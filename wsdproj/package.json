@@ -1,0 +1,19 @@
+{
+  "name": "wsdproj",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nois0720/web-system-design-proj.git"
+  },
+  "author": "nois",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nois0720/web-system-design-proj/issues"
+  },
+  "homepage": "https://github.com/nois0720/web-system-design-proj#readme"
+}
