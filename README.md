@@ -1,1 +1,1 @@
-# web-system-design-proj
+# 웹시스템 설계 프로젝트
