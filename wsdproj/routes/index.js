@@ -24,10 +24,17 @@ var model = mongoose.model('model', testModel, 'model');
 //     res.render('index', {title: 'Express'});
 // });
 
-router.get('/', function (req, res, next) {
-    model.find({}, function (err, data) {
-        res.render('index', {data: data});
-    });
-});
+module.exports.getOne = function (req, res) {
+    model.find({})
+        .exec(function (err, model) {
+            sendJsonResponse(res, 200, model);
+        })
+};
+
+// router.get('/', function (req, res, next) {
+//     model.find({}, function (err, data) {
+//         res.render('index', {data: data});
+//     });
+// });
 
 module.exports = router;
