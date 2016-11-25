@@ -1,2 +1,10 @@
+// OSX files:
 .DS_Store
+
+// log files:
 *.log
+
+// user-specific stuff:
+.idea/workspace.xml
+wsdproj/.idea/workspace.xml
+wsdproj/.idea/tasks.xml
