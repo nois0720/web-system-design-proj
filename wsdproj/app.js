@@ -7,13 +7,14 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var test1 = require('./routes/index');
+var test2 = require('./routes/index');
 var app = express();
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'client')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+//app.use(express.static(path.join(__dirname, 'client')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,9 +23,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+app.use('/Systemjs.config.js', express.static(path.join(__dirname, 'client/Systemjs.config.js')));
+app.use('/app', express.static(path.join(__dirname, 'client/app')));
+//app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/test1', test1);
+app.use('/test2', test2);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
