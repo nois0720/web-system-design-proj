@@ -5,6 +5,4 @@
 *.log
 
 // user-specific stuff:
-.idea/workspace.xml
-wsdproj/.idea/workspace.xml
-wsdproj/.idea/tasks.xml
+wsdproj.idea
