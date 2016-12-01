@@ -3,55 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" \"express\"",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "lite": "lite-server",
-    "express": "node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
+    "ejs": "~2.5.2",
     "express": "~4.14.0",
-    "jade": "~1.11.0",
-    "mongodb": "^2.2.11",
-    "mongoose": "^4.6.8",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "angular-in-memory-web-api": "~0.1.15",
-    "@angular/common": "~2.2.0",
-    "@angular/compiler": "~2.2.0",
-    "@angular/core": "~2.2.0",
-    "@angular/forms": "~2.2.0",
-    "@angular/http": "~2.2.0",
-    "@angular/platform-browser": "~2.2.0",
-    "@angular/platform-browser-dynamic": "~2.2.0",
-    "@angular/router": "~3.2.0",
-    "@angular/upgrade": "~2.2.0",
-    "core-js": "^2.4.1",
-    "reflect-metadata": "^0.1.8",
-    "rxjs": "5.0.0-beta.12",
-    "systemjs": "0.19.39",
-    "zone.js": "^0.6.25"
-  },
-  "main": "app.js",
-  "devDependencies": {
-    "@types/core-js": "^0.9.34",
-    "@types/node": "^6.0.45",
-    "concurrently": "^3.0.0",
-    "lite-server": "^2.2.2",
-    "typescript": "^2.0.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nois0720/web-system-design-proj.git"
-  },
-  "author": "nois",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nois0720/web-system-design-proj/issues"
-  },
-  "homepage": "https://github.com/nois0720/web-system-design-proj#readme",
-  "description": ""
+    "serve-favicon": "~2.3.0"
+  }
 }
