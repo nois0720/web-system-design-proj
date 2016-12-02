@@ -24,16 +24,31 @@ PC_img.onload = function () {
     context.drawImage(PC_img, PC_posX, PC_posY, 32, 32);
 }
 
-//PC 움직이기
-var i = 0;
-var j = 0;
-var angle = 0;
 
+
+var commandList = document.getElementsByClassName('commandList');
+console.log('canvas처리코드에서 받음 길이'+  commandList.length);
+
+//PC 움직이기
+for(var k=0;k<commandList.length;k++){
+    var i = 0;
+    var j = 0;
+    var angle = 0;
+    if(commandList[k].innerHTML=='1'){
+        setInterval(move, 100);
+    }else if(commandList[k].innerHTML=='2'){
+        setInterval(rotate, 100);
+    }
+}
+console.log(count);
 //setInterval(rotate, 10);
 //setInterval(move, 30);
 
 
 function move() {
+    var count =0;
+    count++;
+
     if (Math.abs(i) < cellWidth && PC_dir == 1) i++;
     if (Math.abs(i) < cellWidth && PC_dir == 3) i--;
     if (Math.abs(j) < cellHeight && PC_dir == 0) j--;
@@ -54,7 +69,7 @@ function rotate() {
 
     context.save();
     context.translate(PC_posX + cellWidth / 2, PC_posY + cellHeight / 2);
-    context.rotate(-angle * Math.PI / 180);
+    context.rotate(angle * Math.PI / 180);
     context.translate(-(PC_posX + cellWidth / 2), -(PC_posY + cellHeight / 2));
     context.drawImage(PC_img, PC_posX, PC_posY, 32, 32);
     context.restore();

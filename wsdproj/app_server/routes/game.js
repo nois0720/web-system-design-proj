@@ -12,7 +12,11 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     console.log("post" + JSON.stringify(req.body));
-    res.render('game', { title: 'Express' });
+    var sample_arr = req.body.test_array;
+    for(var i=0;i<sample_arr.length;i++) {
+        console.log(sample_arr[i]);
+    }
+    res.render('result', {arr:sample_arr });
 });
 
 module.exports = router;
