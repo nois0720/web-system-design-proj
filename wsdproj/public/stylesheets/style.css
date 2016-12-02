@@ -1,57 +1,69 @@
 .droptarget {
-  align-content: center;
-  float: left;
-  width: 100%;
-  height: 16%;
-  margin: auto;
-  padding: inherit;
-  border: 1px solid black;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    align-content: center;
+    float: left;
+    width: 100%;
+    height: 16%;
+    margin: auto;
+    padding: inherit;
+    border: 1px solid black;
 }
 
 #dropcontainer {
-  align-content: center;
-  float: left;
-  width: 100%;
-  height: 16%;
-  margin: auto;
-  padding: inherit;
-  border: 1px solid black;
+    align-content: center;
+    float: left;
+    width: 100%;
+    height: 16%;
+    margin: auto;
+    padding: inherit;
+    border: 1px solid black;
 }
 
 body {
-  Margin: 0;
-  Padding: 1%;
+    Margin: 0;
+    Padding: 1%;
 }
 
 .area {
-  Border: 1px solid black;
-  overflow: scroll;
+    Border: 1px solid black;
+    overflow: scroll;
 }
 
 .main {
-  Height: 70%;
-  Float: left;
+    Height: 70%;
+    Float: left;
+}
+
+.sidebar-top {
+    Height: 80%;
+    border: 1px solid black;
+}
+
+.sidebar-bottom {
+    Height: auto;
+    border: 1px solid black;
 }
 
 #header {
-  Height: 10%;
+    Height: 10%;
 }
 
 #content {
-  Width: 39%;
+    Width: 39%;
 }
 
 #sidebar1 {
-  Width: 30%;
-  Border: none;
+    Width: 30%;
 }
 
 #sidebar2 {
-  Width: 30%;
-  Float: right;
+    Width: 30%;
+    Float: right;
 }
 
 #footer {
-  Clear: both;
-  Height: 10%;
+    Clear: both;
+    Height: 10%;
 }
