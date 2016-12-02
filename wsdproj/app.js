@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./app_server/routes/index');
 var users = require('./app_server/routes/users');
-var signUp = require('./app_server/routes/sign-up');
+var signUp = require('./app_server/routes/game');
 var testCanvas = require('./app_server/routes/testCanvas');
 
 var app = express();
