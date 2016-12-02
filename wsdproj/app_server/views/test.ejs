@@ -2,7 +2,11 @@
 <head>
     <title>CSS Layout demo</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="javascripts/drag-act.js"></script>
+    <style>
+        #content {border: 3px solid black;width:320px;height:420px; float:left}
+    </style>
+    <script src="javascripts/drag_act.js"></script>
+    <script src="javascripts/canvas_act.js"></script>
 </head>
 
 <body>
@@ -10,21 +14,28 @@
     <div class="scaffold">Header</div>
 </div>
 <div class="main area" id="content">
-    <div class="scaffold">Content</div>
+    <canvas id='myCanvas' width=256px height=256px></canvas>
 </div>
+<script src="javascripts/canvas_act.js"></script>
 <div class="main area" id="sidebar1">
     <form name="submitAnswer" onsubmit="getAnswer()" method="post">
-        <input type="submit" value="submit" >
+        <input type="submit" value="submit">
     </form>
-    <img id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)" width="64" height="64" movable="false">
+    <img id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)" width="64" height="64"
+         movable="false">
     </br>
-    <img id="rotate" src="/images/rotate.png" draggable="true" ondragstart="dragStart(event)" width="64" height="64" movable="false">
+    <img id="rotate" src="/images/rotate.png" draggable="true" ondragstart="dragStart(event)" width="64" height="64"
+         movable="false">
 </div>
 <div class="main area" id="sidebar2">
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)" ondragover="allowDrop(event)" droppable="true"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)" ondragover="allowDrop(event)" droppable="true"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)" ondragover="allowDrop(event)" droppable="true"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)" ondragover="allowDrop(event)" droppable="true"></div>
+    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+         ondragover="allowDrop(event)" droppable="true"></div>
+    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+         ondragover="allowDrop(event)" droppable="true"></div>
+    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+         ondragover="allowDrop(event)" droppable="true"></div>
+    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+         ondragover="allowDrop(event)" droppable="true"></div>
 </div>
 <div class="area" id="footer">
     <div class="scaffold">Footer</div>
