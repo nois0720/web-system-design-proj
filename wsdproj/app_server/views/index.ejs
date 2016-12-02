@@ -1,11 +1,34 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<!doctype html>
+<html lang=en>
+<head>
+    <meta charset=utf-8>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
+    <title>My HTML 5 Page</title>
+</head>
+<body>
+<div id="header">Header</div>
+<div id="main">Main</div>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="sidebar">Sidebar</div>
+    <img id="drag1" src="/images/arrow.png" draggable="true" ondragstart="drag(event)" width="64" height="64">
+    <img id="drag2" src="/images/arrow.png" draggable="true" ondragstart="drag(event)" width="64" height="64">
+<div id="footer">Footer</div>
+</body>
 </html>
