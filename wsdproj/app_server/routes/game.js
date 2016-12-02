@@ -7,12 +7,12 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log("get" + JSON.stringify(req.query));
-    res.render('test', { title: 'Express' });
+    res.render('game', { title: 'Express' });
 });
 
 router.post('/', function(req, res, next) {
     console.log("post" + JSON.stringify(req.body));
-    res.render('test', { title: 'Express' });
+    res.render('game', { title: 'Express' });
 });
 
 module.exports = router;
