@@ -5,18 +5,18 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     console.log("get" + JSON.stringify(req.query));
-    res.render('game', { title: 'Express' });
+    res.render('game', {title: 'Express'});
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
     console.log("post" + JSON.stringify(req.body));
     var sample_arr = req.body.test_array;
-    for(var i=0;i<sample_arr.length;i++) {
+    for (var i = 0; i < sample_arr.length; i++) {
         console.log(sample_arr[i]);
     }
-    res.render('result', {arr:sample_arr });
+    res.render('result', {arr: sample_arr});
 });
 
 module.exports = router;
