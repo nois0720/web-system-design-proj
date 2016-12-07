@@ -12,10 +12,8 @@ function allowDrop(ev) {
 
 function dragStart(ev) {
     if (ev.target.getAttribute("movable") === "true") {
-        console.log("set change");
         state = States.change;
     } else {
-        console.log("set copy");
         state = States.copy;
     }
 
@@ -68,10 +66,8 @@ function dropImg(ev) {
     var id = ev.dataTransfer.getData("text");
 
     if (state === States.change) {
-        console.log("change");
         ev.target.appendChild(parentElement.childNodes[0]);
     } else {
-        console.log("copy");
         var img = createImg(id);
         ev.target.appendChild(img);
     }

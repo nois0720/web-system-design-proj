@@ -1,78 +1,109 @@
 /**
  * Created by Nois on 2016. 12. 2..
  */
-var canvas = document.getElementById('myCanvas');
-var context = canvas.getContext('2d');
+var Dir = {
+    up: 0,
+    right: 1,
+    down: 2,
+    left: 3
+};
+
+var mapWidth = 256;
+var mapHeight = 256;
 var cellWidth = 32;
 var cellHeight = 32;
-var level_img = new Image();
-var PC_img = new Image();
-level_img.src = "/images/testLevel_jpeg.jpg";
-PC_img.src = "/images/PC.png";
-
 
 var PC_posX_cell = 3;
 var PC_posY_cell = 4;
 var PC_posX = cellWidth * PC_posX_cell;
 var PC_posY = cellHeight * PC_posY_cell;
-var PC_dir = 0; //up:0 , right:1, down:2, left:3
+var PC_dir = Dir.up;
+var PC_angle = 0;
 
-level_img.onload = function () {
-    context.drawImage(level_img, 0, 0, 256, 256);
-}
-PC_img.onload = function () {
-    context.drawImage(PC_img, PC_posX, PC_posY, 32, 32);
-}
-
-
-
+var intervalId;
 var commandList = document.getElementsByClassName('commandList');
-console.log('canvas처리코드에서 받음 길이'+  commandList.length);
 
-//PC 움직이기
-for(var k=0;k<commandList.length;k++){
-    var i = 0;
-    var j = 0;
-    var angle = 0;
-    if(commandList[k].innerHTML=='1'){
-        setInterval(move, 100);
-    }else if(commandList[k].innerHTML=='2'){
-        setInterval(rotate, 100);
+(function () {
+    //console.log('canvas처리코드에서 받음 길이' + commandList.length);
+    for (var i = 0, max = commandList.length; i < max; i++) {
+        (function (cmdIndex) {
+            setTimeout(function () {
+                cmdProcess(cmdIndex);
+            }, 1000 * cmdIndex);
+        })(i);
+    }
+})();
+
+function cmdProcess(index) {
+    if (commandList[index].innerHTML == '1') {
+        intervalId = setInterval(move, (1000 / 32));
+    } else if (commandList[index].innerHTML == '2') {
+        intervalId = setInterval(rotate, (1000 / 90));
     }
 }
-console.log(count);
-//setInterval(rotate, 10);
-//setInterval(move, 30);
 
+var moveCount = 0;
 
 function move() {
-    var count =0;
-    count++;
+    moveCount++;
 
-    if (Math.abs(i) < cellWidth && PC_dir == 1) i++;
-    if (Math.abs(i) < cellWidth && PC_dir == 3) i--;
-    if (Math.abs(j) < cellHeight && PC_dir == 0) j--;
-    if (Math.abs(j) < cellHeight && PC_dir == 2) j++;
+    if (PC_dir == Dir.left)  PC_posX--;
+    if (PC_dir == Dir.right) PC_posX++;
+    if (PC_dir == Dir.up)  PC_posY--;
+    if (PC_dir == Dir.down)  PC_posY++;
 
-    PC_posX = PC_posX + i;
-    PC_posY = PC_posX + j;
+    if (moveCount == cellWidth - 1) {
+        moveCount = 0;
+        clearInterval(intervalId);
+    }
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(level_img, 0, 0, 256, 256);
-    context.drawImage(PC_img, PC_posX, PC_posY, 32, 32);
+    draw();
 }
+
+var rotateCount = 0;
+
 function rotate() {
-    if (angle < 90) angle++;
+    rotateCount++;
 
+    if (rotateCount < 90) {
+        PC_angle++;
+        PC_angle %= 360;
+    } else {
+        clearInterval(intervalId);
+        rotateCount = 0;
+        PC_dir = (PC_dir + 1) % 4;
+    }
+
+    draw();
+}
+
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+
+var level_img = new Image();
+var PC_img = new Image();
+
+level_img.src = "/images/testLevel_jpeg.jpg";
+PC_img.src = "/images/PC.png";
+level_img.onload = function () {
+    context.drawImage(level_img, 0, 0, mapWidth, mapHeight);
+}
+PC_img.onload = function () {
+    context.drawImage(PC_img, PC_posX, PC_posY, cellWidth, cellHeight);
+}
+
+function draw() {
+    // Clear Canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(level_img, 0, 0, 256, 256);
 
+    // Draw 8x8 Table
+    context.drawImage(level_img, 0, 0, mapWidth, mapHeight);
+
+    // Draw Main Character
     context.save();
     context.translate(PC_posX + cellWidth / 2, PC_posY + cellHeight / 2);
-    context.rotate(angle * Math.PI / 180);
+    context.rotate(PC_angle * Math.PI / 180);
     context.translate(-(PC_posX + cellWidth / 2), -(PC_posY + cellHeight / 2));
     context.drawImage(PC_img, PC_posX, PC_posY, 32, 32);
     context.restore();
-
-    PC_dir = (PC_dir + 1) % 4; //direction 변경해줌 - 시계방향
 }
