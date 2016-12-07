@@ -1,7 +1,8 @@
 /**
  * Created by Nois on 2016. 12. 2..
  */
-var States = {"copy": 0, "change": 1};
+var States = {"origin": 0, "copy": 1};
+var dropAreaStates = {"clear": "clear", "full": "full"};
 
 var parentElement = "";
 var state;
@@ -11,8 +12,8 @@ function allowDrop(ev) {
 }
 
 function dragStart(ev) {
-    if (ev.target.getAttribute("movable") === "true") {
-        state = States.change;
+    if (ev.target.className === "origin") {
+        state = States.origin;
     } else {
         state = States.copy;
     }
@@ -23,13 +24,11 @@ function dragStart(ev) {
 
 function drop(ev) {
     ev.preventDefault();
-    if (ev.target.className === "droptarget") {
-
-        ev.target.style.border = "1px solid black";
-
-        if (ev.target.getAttribute("droppable") === "true") {
-            dropImg(ev);
-        } else if (ev.target.getAttribute("changeable") === "true") {
+    var areaState = ev.target.getAttribute("areastate");
+    if (areaState === dropAreaStates.clear) {
+        dropImg(ev);
+    } else if (areaState === dropAreaStates.full) {
+        if (state === States.copy) {
             changeImg(ev);
         }
     }
@@ -41,17 +40,21 @@ function dropDelete(ev) {
         parentElement.removeChild(parentElement.childNodes[0]);
         ev.target.style.border = "1px solid black";
     }
-    if (parentElement.getAttribute("droppable") === "false") {
-        parentElement.setAttribute("droppable", "true");
+
+    if (parentElement.getAttribute("areastate") === dropAreaStates.full) {
+        parentElement.setAttribute("areastate", dropAreaStates.clear);
     }
 }
 
 function dragEnter(ev) {
-    if (ev.target.className === "droptarget") {
-        if (ev.target.getAttribute("droppable") === "true") {
-            ev.target.style.border = "3px dotted red";
-        } else if (ev.target.getAttribute("changeable") === "true") {
-            ev.target.style.border = "3px dotted blue";
+    if (ev.target.className !== "droptarget") return;
+
+    var areaState = ev.target.getAttribute("areastate");
+    if (areaState === dropAreaStates.clear) {
+        ev.target.style.border = "3px dotted red";
+    } else if (areaState === dropAreaStates.full) {
+        if (state === States.copy) {
+            ev.target.style.border = "3px dotted green";
         }
     }
 }
@@ -65,26 +68,25 @@ function dragLeave(ev) {
 function dropImg(ev) {
     var id = ev.dataTransfer.getData("text");
 
-    if (state === States.change) {
+    if (state === States.copy) {
         ev.target.appendChild(parentElement.childNodes[0]);
     } else {
         var img = createImg(id);
         ev.target.appendChild(img);
     }
 
-    ev.target.setAttribute("droppable", "false");
-    ev.target.setAttribute("changeable", "true");
-
-    if (state === States.change && parentElement.getAttribute("droppable") === "false") {
-        parentElement.setAttribute("droppable", "true");
-    }
+    ev.target.setAttribute("areastate", dropAreaStates.full);
+    ev.target.style.border = "1px solid black";
 }
 
 function changeImg(ev) {
-    if(state === States.copy) return;
+    if (state !== States.copy) {
+        return;
+    }
 
     parentElement.appendChild(ev.target.childNodes[0]);
     ev.target.appendChild(parentElement.childNodes[0]);
+    ev.target.style.border = "1px solid black";
 }
 
 function createImg(id) {
@@ -97,7 +99,6 @@ function createImg(id) {
     img.setAttribute("height", "64");
     img.setAttribute("draggable", "true");
     img.setAttribute("ondragstart", "dragStart(event)");
-    img.setAttribute("movable", "true");
 
     return img;
 }
@@ -119,7 +120,6 @@ function getAnswer() {
         } else {
             continue;
         }
-
     }
 
     var el;
@@ -132,5 +132,4 @@ function getAnswer() {
     }
     formElement.submit();
     return false;
-    //return document.getElementById("sidebar2");
 }
