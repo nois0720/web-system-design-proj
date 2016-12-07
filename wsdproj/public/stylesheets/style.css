@@ -67,3 +67,21 @@ body {
     Clear: both;
     Height: 10%;
 }
+
+.levelDesignCell{
+    border:1px black solid;
+    width:32px;
+    height:32px;
+    float:left;
+}
+
+.levelDesignCell:nth-child(8n){
+    border:1px black dotted;
+    width:32px;
+    height:32px;
+    float:none;
+}
+#levelDesignMain{
+    width:60%;
+    float:left;
+}

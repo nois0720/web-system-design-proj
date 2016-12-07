@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>CSS Layout demo</title>
+    <meta charset="utf-8">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <style>
+        #content {border: 3px solid black;width:320px;height:420px; float:left}
+    </style>
+    <script src="javascripts/levelDesign_act.js"></script>
+</head>
+
+<body>
+<div class="area" id="header">
+    <div class="scaffold">Header</div>
+</div>
+<div class="main area" id="sidebar1">
+    <div class="sidebar-top">
+        <img id="obstacle" src="/images/obstacle.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32" movable="false">
+        <img id="PC" src="/images/PC.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32" movable="false">
+    </div>
+    <div class="sidebar-bottom">
+        <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
+             ondragover="allowDrop(event)" droppable="true"></div>
+    </div>
+</div>
+
+</div>
+<div class="main area" id="levelDesignMain"  ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
+     ondragover="allowDrop(event)" droppable="true">
+
+    <% for(var i=0;i<8;i++) {%>
+        <%for(var j=0;j<8;j++) {%>
+                <div id=cell<%=i+j%> class="levelDesignCell" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+                 ondragover="allowDrop(event)" droppable="true"></div>
+        <%}%>
+    <%}%>
+    <br><br>
+    <form action="/makeGame/levelDesignCreate" method="post" onsubmit="createLevel()">
+        Level Name : <input type="text" name="levelName" placeholder="1-2"><br>
+        Designer   : <input type="text" name="levelDesigner" placeholder="NDY"><br>
+        <input type="submit" value="create">
+    </form>
+</div>
+<div class="area" id="footer">
+    <div class="scaffold">Footer</div>
+</div>
+</body>
+</html>

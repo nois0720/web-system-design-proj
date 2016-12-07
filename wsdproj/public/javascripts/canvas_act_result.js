@@ -27,39 +27,39 @@ PC_img.onload = function () {
 
 
 var commandList = document.getElementsByClassName('commandList');
-console.log('canvas처리코드에서 받음 길이'+  commandList.length);
+
 
 //PC 움직이기
+
+
+var angle = 0;
 for(var k=0;k<commandList.length;k++){
-    var i = 0;
-    var j = 0;
-    var angle = 0;
+    var cnt = 0;
     if(commandList[k].innerHTML=='1'){
-        setInterval(move, 100);
+        setInterval(move(cnt), 30);
     }else if(commandList[k].innerHTML=='2'){
-        setInterval(rotate, 100);
+        setInterval(rotate, 10);
     }
 }
-console.log(count);
+
 //setInterval(rotate, 10);
 //setInterval(move, 30);
 
 
-function move() {
-    var count =0;
-    count++;
+function move(cnt) {
 
-    if (Math.abs(i) < cellWidth && PC_dir == 1) i++;
-    if (Math.abs(i) < cellWidth && PC_dir == 3) i--;
-    if (Math.abs(j) < cellHeight && PC_dir == 0) j--;
-    if (Math.abs(j) < cellHeight && PC_dir == 2) j++;
 
-    PC_posX = PC_posX + i;
-    PC_posY = PC_posX + j;
+    if (cnt < cellWidth && PC_dir == 1) PC_posX++
+    if (cnt < cellWidth && PC_dir == 3) PC_posX--
+    if (cnt < cellHeight && PC_dir == 0) PC_posY--;
+    if (cnt < cellHeight && PC_dir == 2) PC_posY++;
+
 
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(level_img, 0, 0, 256, 256);
     context.drawImage(PC_img, PC_posX, PC_posY, 32, 32);
+    cnt++;
+    console.log(cnt);
 }
 function rotate() {
     if (angle < 90) angle++;

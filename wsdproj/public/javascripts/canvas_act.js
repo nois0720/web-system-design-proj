@@ -40,7 +40,7 @@ function move() {
     if (Math.abs(j) < cellHeight && PC_dir == 2) j++;
 
     PC_posX = PC_posX + i;
-    PC_posY = PC_posX + j;
+    PC_posY = PC_posY + j;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(level_img, 0, 0, 256, 256);
