@@ -15,23 +15,22 @@
 </div>
 <div class="main area" id="sidebar1">
     <div class="sidebar-top">
-        <img id="obstacle" src="/images/obstacle.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32" movable="false">
-        <img id="PC" src="/images/PC.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32" movable="false">
+        <img class="origin" id="obstacle" src="/images/obstacle.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
+        <img class="origin" id="PC" src="/images/PC.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
     </div>
     <div class="sidebar-bottom">
         <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
-             ondragover="allowDrop(event)" droppable="true"></div>
+             ondragover="allowDrop(event)" areastate="clear"></div>
     </div>
 </div>
 
 </div>
 <div class="main area" id="levelDesignMain"  ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
-     ondragover="allowDrop(event)" droppable="true">
-
+     ondragover="allowDrop(event)" areastate="clear">
     <% for(var i=0;i<8;i++) {%>
         <%for(var j=0;j<8;j++) {%>
                 <div id=cell<%=i+j%> class="levelDesignCell" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-                 ondragover="allowDrop(event)" droppable="true"></div>
+                 ondragover="allowDrop(event)" areastate="clear"></div>
         <%}%>
     <%}%>
     <br><br>

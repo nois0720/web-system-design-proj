@@ -12,7 +12,4 @@ router.get('/', function(req, res, next) {
     res.render('make_game', { title: 'Express' });
 });
 
-
-
-
 module.exports = router;

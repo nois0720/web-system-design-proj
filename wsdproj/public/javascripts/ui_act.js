@@ -39,11 +39,11 @@ function dropDelete(ev) {
     if (ev.target.className === "droptarget") {
         parentElement.removeChild(parentElement.childNodes[0]);
         ev.target.style.border = "1px solid black";
+        if (parentElement.getAttribute("areastate") === dropAreaStates.full) {
+            parentElement.setAttribute("areastate", dropAreaStates.clear);
+        }
     }
 
-    if (parentElement.getAttribute("areastate") === dropAreaStates.full) {
-        parentElement.setAttribute("areastate", dropAreaStates.clear);
-    }
 }
 
 function dragEnter(ev) {
