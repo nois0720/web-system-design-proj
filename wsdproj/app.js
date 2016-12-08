@@ -11,7 +11,27 @@ var game = require('./app_server/routes/game');
 var testCanvas = require('./app_server/routes/testCanvas');
 var makeGame = require('./app_server/routes/makeGame');
 
+var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
+
 var app = express();
+
+var store = new MongoDBStore({
+  uri: "mongodb://localhost:27017/aigodb",
+  collection: 'user'
+});
+
+store.on('error', function (error) {
+  assert.ifError(error),
+      assert.ok(false)
+});
+
+app.use(session({
+  secret: 'aigo-user',
+  resave: false,
+  store: store,
+  saveUninitialized: false
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server','views'));

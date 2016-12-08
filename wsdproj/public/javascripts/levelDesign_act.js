@@ -50,8 +50,6 @@ function dragEnter(ev) {
     if (ev.target.className !== "levelDesignCell") return;
 
     var areaState = ev.target.getAttribute("areastate");
-
-    console.log(areaState);
     if (areaState === dropAreaStates.clear) {
         ev.target.style.border = "1px dotted red";
     } else if (areaState === dropAreaStates.full) {
@@ -59,7 +57,7 @@ function dragEnter(ev) {
             ev.target.style.border = "1px dotted green";
         }
     }
-}
+}s
 
 function dragLeave(ev) {
     if (ev.target.className === "levelDesignCell") {

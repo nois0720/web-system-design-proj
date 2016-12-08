@@ -3,7 +3,12 @@
     <title>CSS Layout demo</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <style>
-        #content {border: 3px solid black;width:320px;height:420px; float:left}
+        #content {
+            border: 3px solid black;
+            width: 320px;
+            height: 420px;
+            float: left
+        }
     </style>
     <script src="javascripts/ui_act.js"></script>
 </head>
@@ -19,29 +24,29 @@
     <form action='/game' name="submitAnswer" onsubmit="getAnswer()" method="post">
         <input type="submit" value="submit">
     </form>
-    <img id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)" width="64" height="64"
-         movable="false" class="command">
+    <img class="origin" id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)" width="64"
+         height="64">
     </br>
-    <img id="rotate" src="/images/rotate.png" draggable="true" ondragstart="dragStart(event)" width="64" height="64"
-         movable="false" class="command">
+    <img class="origin" id="rotate" src="/images/rotate.png" draggable="true" ondragstart="dragStart(event)" width="64"
+         height="64">
 </div>
 <div class="main area" id="sidebar2">
     <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" droppable="true" id="aa"></div>
+         ondragover="allowDrop(event)" areastate="clear"></div>
     <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" droppable="true"></div>
+         ondragover="allowDrop(event)" areastate="clear"></div>
     <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" droppable="true"></div>
+         ondragover="allowDrop(event)" areastate="clear"></div>
     <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" droppable="true"></div>
+         ondragover="allowDrop(event)" areastate="clear"></div>
 </div>
 <div class="area" id="footer">
     <div class="scaffold">Footer</div>
     <div display="none">
         <ul>
-        <%for (var i in arr) {%>
-        <li class="commandList"><%=arr[i]%></li>
-        <%}%>
+            <% for (var i in arr) { %>
+            <li class="commandList"><%= arr[i] %></li>
+            <% } %>
         </ul>
     </div>
 </div>

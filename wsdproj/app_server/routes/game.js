@@ -3,6 +3,10 @@
  */
 var express = require('express');
 var router = express.Router();
+var session = require('express-session');
+var MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');
+var uri = "mongodb://localhost:27017/aigodb";
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
