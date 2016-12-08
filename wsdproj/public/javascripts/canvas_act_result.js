@@ -36,9 +36,11 @@ var commandList = document.getElementsByClassName('commandList');
 
 function cmdProcess(index) {
     if (commandList[index].innerHTML == '1') {
-        intervalId = setInterval(move, (1000 / 32));
+        intervalId = setInterval(move, (1000 / 30));
+        console.log("set interval : " + intervalId);
     } else if (commandList[index].innerHTML == '2') {
         intervalId = setInterval(rotate, (1000 / 90));
+        console.log("set interval : " + intervalId);
     }
 }
 
@@ -55,6 +57,7 @@ function move() {
     if (moveCount == cellWidth - 1) {
         moveCount = 0;
         clearInterval(intervalId);
+        console.log("clear interval : " + intervalId);
     }
 
     draw();
@@ -72,6 +75,7 @@ function rotate() {
         clearInterval(intervalId);
         rotateCount = 0;
         PC_dir = (PC_dir + 1) % 4;
+        console.log("clear interval :" + intervalId);
     }
 
     draw();

@@ -12,20 +12,18 @@ var game = require('./app_server/routes/game');
 var testCanvas = require('./app_server/routes/testCanvas');
 var makeGame = require('./app_server/routes/makeGame');
 
-var session = require('express-session');
-var MongoDBStore = require('connect-mongodb-session')(session);
+var mongoose = require('mongoose');
 
 var app = express();
 
-var store = new MongoDBStore({
-  uri: "mongodb://localhost:27017/aigodb",
-  collection: 'user'
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+  // CONNECTED TO MONGODB SERVER
+  console.log("Connected to mongod server");
 });
 
-store.on('error', function (error) {
-  assert.ifError(error),
-      assert.ok(false)
-});
+mongoose.connect('mongodb://localhost/aigodb');
 
 app.use(session({
   secret: 'aigo-user',
@@ -51,7 +49,6 @@ app.use(session({
   resave:false,
   saveUninitialized:true
 }));
-
 
 app.use('/', index);
 app.use('/users', users);
