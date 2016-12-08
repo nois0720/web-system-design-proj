@@ -26,23 +26,17 @@
          movable="false" class="command">
 </div>
 <div class="main area" id="sidebar2">
+    <%for(var i=0;i<10;i++){%>
     <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
          ondragover="allowDrop(event)" droppable="true" id="aa"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" droppable="true"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" droppable="true"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" droppable="true"></div>
+    <%}%>
 </div>
 <div class="area" id="footer">
     <div class="scaffold">Footer</div>
-    <div display="none">
-        <ul>
-        <%for (var i in arr) {%>
-        <li class="commandList"><%=arr[i]%></li>
-        <%}%>
-        </ul>
+    <div style="display:none">
+         <%for (var i in arr) {%>
+            <span class="commandList"><%=arr[i]%></span>
+         <%}%>
     </div>
 </div>
 <script src="javascripts/canvas_act_result.js"></script>

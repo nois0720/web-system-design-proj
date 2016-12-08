@@ -40,14 +40,10 @@
 
 </div>
 <div class="main area" id="sidebar2">
+    <%for(var i=0;i<10;i++){%>
     <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
          ondragover="allowDrop(event)" areastate="clear"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" areastate="clear"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" areastate="clear"></div>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" areastate="clear"></div>
+    <%}%>
 </div>
 <div class="area" id="footer">
     <div class="scaffold">Footer</div>

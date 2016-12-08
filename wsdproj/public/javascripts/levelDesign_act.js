@@ -7,6 +7,7 @@ var dropAreaStates = {"clear": "clear", "full": "full"};
 var parentElement = "";
 var state;
 
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
