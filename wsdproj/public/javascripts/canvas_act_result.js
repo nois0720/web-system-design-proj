@@ -8,7 +8,7 @@ var cmdCode = {
 
 var level = [
     [0, 0, 2, 2, 0, 0, 0, 0],
-    [0, 0, 1, 2, 0, 0, 0, 0],
+    [0, 1, 0, 2, 0, 0, 0, 0],
     [0, 2, 2, 2, 0, 0, 0, 0],
     [3, 2, 0, 0, 0, 0, 0, 0],
     [0, 2, 2, 0, 0, 0, 0, 0],
@@ -101,6 +101,8 @@ function startCmdProcess(index) {
 function stopCmdProcess(index) {
     clearInterval(intervalList[index]);
     if (commandList[index].innerHTML == cmdCode.move) {
+        errorContorl();
+
         if (PC_dir == Dir.left) {
             PC_posX_cell--;
         } else if (PC_dir == Dir.right) {
@@ -110,9 +112,7 @@ function stopCmdProcess(index) {
         } else {
             PC_posY_cell++;
         }
-
         checkIsValidCell();
-
         console.log("pc_x_cell : " + PC_posX_cell + " pc_y_cell : " + PC_posY_cell);
     } else if (commandList[index].innerHTML == cmdCode.turnLeft) {
         PC_dir = (PC_dir + 1) % 4;
@@ -120,10 +120,10 @@ function stopCmdProcess(index) {
 }
 
 function move() {
-    if (PC_dir == Dir.left)  PC_posX--;
+    if (PC_dir == Dir.left) PC_posX--;
     if (PC_dir == Dir.right) PC_posX++;
-    if (PC_dir == Dir.up)  PC_posY--;
-    if (PC_dir == Dir.down)  PC_posY++;
+    if (PC_dir == Dir.up) PC_posY--;
+    if (PC_dir == Dir.down) PC_posY++;
 
     draw();
 }
@@ -142,7 +142,7 @@ var PC_img = new Image();
 var obstacle_img = new Image();
 var goal_img = new Image();
 
-level_img.src = "/images/testLevel_jpeg.jpg";
+level_img.src = "/images/levelTable.png";
 PC_img.src = "/images/PC.png";
 obstacle_img.src = "/images/obstacle.png";
 goal_img.src = "/images/flag.png";
@@ -167,6 +167,23 @@ function draw() {
     context.translate(-(PC_posX + cellWidth / 2), -(PC_posY + cellHeight / 2));
     context.drawImage(PC_img, PC_posX, PC_posY, 32, 32);
     context.restore();
+}
+
+function errorContorl() {
+    var remainX = PC_posX % cellWidth;
+    var remainY = PC_posY % cellHeight;
+
+    if(remainX > 16) {
+        PC_posX += (cellWidth - remainX);
+    } else if(PC_posX < 16) {
+        PC_posX -= remainX;
+    }
+
+    if(remainY > 16) {
+        PC_posY += (cellHeight - remainY);
+    } else if(PC_posY < 16) {
+        PC_posY -= remainY;
+    }
 }
 
 function checkIsValidCell() {

@@ -11,7 +11,7 @@ var gameObjectID = {
 
 var level = [
     [0, 0, 2, 2, 0, 0, 0, 0],
-    [0, 0, 1, 2, 0, 0, 0, 0],
+    [0, 1, 0, 2, 0, 0, 0, 0],
     [0, 2, 2, 2, 0, 0, 0, 0],
     [3, 2, 0, 0, 0, 0, 0, 0],
     [0, 2, 2, 0, 0, 0, 0, 0],
@@ -29,7 +29,7 @@ var PC_img = new Image();
 var obstacle_img = new Image();
 var goal_img = new Image();
 
-level_img.src = "/images/testLevel_jpeg.jpg";
+level_img.src = "/images/levelTable.png";
 PC_img.src = "/images/PC.png";
 obstacle_img.src = "/images/obstacle.png";
 goal_img.src = "/images/flag.png";
