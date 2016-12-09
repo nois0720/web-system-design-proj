@@ -161,8 +161,14 @@ function draw() {
 }
 
 function checkIsValidCell() {
-    if (level[PC_posY_cell][PC_posX_cell] == 2) {
+    if( PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0  || PC_posY_cell < 0 ){
+        isFail = true;
+        alert('fail!!!');
+    }
+    if (level[PC_posY_cell][PC_posX_cell] == 2 ) {
         isFail = true;
         alert("fail!!!");
     }
+
+
 }
