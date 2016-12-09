@@ -12,11 +12,13 @@ module.exports.createLevel = function(req, res){
         levelName : req.body.levelName,
         levelDesigner: req.body.levelDesigner
     });
+
     level.save(function(err){
         if(err){
             console.log('err : '+err);
             return;
         }
     })
+
     res.render('index', {});
 }
