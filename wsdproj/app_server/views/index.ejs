@@ -10,6 +10,7 @@
             var target = tr.parentNode.childNodes[7];
             var levelId = target.innerText;
 
+            console.log(levelId);
             form.setAttribute('action','/game?levelId='+ levelId);
             form.submit();
 
