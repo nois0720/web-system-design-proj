@@ -85,9 +85,11 @@ function startCmdProcess(index) {
         return;
     }
     if (commandList[index].innerHTML == '1') {
-        intervalId = setInterval(move, (1000 / 32));
+        intervalId = setInterval(move, (1000 / 30));
+        console.log("set interval : " + intervalId);
     } else if (commandList[index].innerHTML == '2') {
         intervalId = setInterval(rotate, (1000 / 90));
+        console.log("set interval : " + intervalId);
     }
 
     intervalList.push(intervalId);
@@ -119,6 +121,7 @@ function move() {
     if (PC_dir == Dir.right) PC_posX++;
     if (PC_dir == Dir.up)  PC_posY--;
     if (PC_dir == Dir.down)  PC_posY++;
+
     draw();
 }
 
