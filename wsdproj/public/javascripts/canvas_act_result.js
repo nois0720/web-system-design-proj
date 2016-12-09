@@ -45,7 +45,6 @@ var parseLevel = function () {
                 PC_posY_cell = i;
             } else if (level[i][j] == 2) {
                 var obs = {obs_posX: j, obs_posY: i};
-                //console.log(obs.obs_posX + "  " + obs.obs_posY)
                 obstaclePosArr.push(obs);
             } else {
                 continue;
@@ -53,7 +52,6 @@ var parseLevel = function () {
         }
     }
     PC_posX = cellWidth * PC_posX_cell;
-
     PC_posY = cellHeight * PC_posY_cell;
 };
 
@@ -94,39 +92,30 @@ function startCmdProcess(index) {
 function stopCmdProcess(index) {
     clearInterval(intervalList[index]);
     if (commandList[index].innerHTML == cmdCode.move) {
-        moveCount = 0;
+        console.log("pc_x : " + PC_posX + "pc_y : " + PC_posY + "pc_x_cell : " + PC_posX_cell + "pc_y_cell : " + PC_posY_cell);
     } else if (commandList[index].innerHTML == cmdCode.turnLeft) {
-        rotateCount = 0;
         PC_dir = (PC_dir + 1) % 4;
     }
+    // console.log(PC_posX);
+    // console.log(PC_posY);
+    // console.log(PC_posX_cell);
+    // console.log(PC_posY_cell);
+    // console.log(PC_angle);
 }
 
-var moveCount = 0;
-
 function move() {
-    moveCount++;
-
     if (PC_dir == Dir.left)  PC_posX--;
     if (PC_dir == Dir.right) PC_posX++;
     if (PC_dir == Dir.up)  PC_posY--;
     if (PC_dir == Dir.down)  PC_posY++;
-
     draw();
 }
-
-var rotateCount = 0;
 
 function rotate() {
-    rotateCount++;
-
-    if (rotateCount < 90) {
-        PC_angle++;
-        PC_angle %= 360;
-    }
-
+    PC_angle++;
+    PC_angle %= 360;
     draw();
 }
-
 
 var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
