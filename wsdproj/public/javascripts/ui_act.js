@@ -103,9 +103,6 @@ function createImg(id) {
     return img;
 }
 
-
-
-
 function getAnswer() {
     var formElement = document.getElementsByTagName('form')[0];
     var answerElement = document.getElementById('sidebar2');

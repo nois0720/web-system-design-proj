@@ -8,11 +8,10 @@
             var form = document.getElementById('_form');
             var tr = event.target;
             var target = tr.parentNode.childNodes[7];
-            var levelId = hiddenList[target.innerText].innerText;
+            var levelId = target.innerText;
 
-            console.log(levelId);
-            form.setAttribute('action','/game?levelId'+ levelId);
-            //form.submit();
+            form.setAttribute('action','/game?levelId='+ levelId);
+            form.submit();
 
         }
     </script>
@@ -35,6 +34,7 @@
             <th class="td_first">No</th>
             <th>Level Name</th>
             <th class="td_third">Level Designer</th>
+            <th style="display:none"></th>
         </tr>
         </thead>
         <tbody>
@@ -43,6 +43,7 @@
             <td class="td_first"><%=i+1%></td>
             <td><%=levelList[i].levelName%></td>
             <td class="td_third"><%=levelList[i].levelDesigner%></td>
+            <td style="display:none"><%=levelList[i]._id%></td>
         </tr>
         <% } %>
         </tbody>
