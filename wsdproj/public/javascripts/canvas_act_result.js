@@ -36,6 +36,7 @@ var PC_posY = 0;
 var obstaclePosArr = new Array(); //obstacle position
 var PC_angle = 0;
 var PC_dir = Dir.up;
+var isFail = false;
 
 var parseLevel = function () {
     for (var i = 0; i < 8; i++) {
@@ -80,6 +81,9 @@ function startLogic() {
 })();
 
 function startCmdProcess(index) {
+    if (isFail) {
+        return;
+    }
     if (commandList[index].innerHTML == '1') {
         intervalId = setInterval(move, (1000 / 32));
     } else if (commandList[index].innerHTML == '2') {
@@ -92,15 +96,22 @@ function startCmdProcess(index) {
 function stopCmdProcess(index) {
     clearInterval(intervalList[index]);
     if (commandList[index].innerHTML == cmdCode.move) {
-        console.log("pc_x : " + PC_posX + "pc_y : " + PC_posY + "pc_x_cell : " + PC_posX_cell + "pc_y_cell : " + PC_posY_cell);
+        if (PC_dir == Dir.left) {
+            PC_posX_cell--;
+        } else if (PC_dir == Dir.right) {
+            PC_posX_cell++;
+        } else if (PC_dir == Dir.up) {
+            PC_posY_cell--;
+        } else {
+            PC_posY_cell++;
+        }
+
+        checkIsValidCell();
+
+        console.log("pc_x_cell : " + PC_posX_cell + " pc_y_cell : " + PC_posY_cell);
     } else if (commandList[index].innerHTML == cmdCode.turnLeft) {
         PC_dir = (PC_dir + 1) % 4;
     }
-    // console.log(PC_posX);
-    // console.log(PC_posY);
-    // console.log(PC_posX_cell);
-    // console.log(PC_posY_cell);
-    // console.log(PC_angle);
 }
 
 function move() {
@@ -144,4 +155,11 @@ function draw() {
     context.translate(-(PC_posX + cellWidth / 2), -(PC_posY + cellHeight / 2));
     context.drawImage(PC_img, PC_posX, PC_posY, 32, 32);
     context.restore();
+}
+
+function checkIsValidCell() {
+    if (level[PC_posY_cell][PC_posX_cell] == 2) {
+        isFail = true;
+        alert("fail!!!");
+    }
 }
