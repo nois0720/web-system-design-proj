@@ -38,3 +38,12 @@ module.exports.createLevel = function(req, res){
         });
     });
 }
+
+module.exports.updateLevel = function(req, res){
+    var level = new Level({
+        createTime: req.body.createTime,
+        levelTable : req.body.level_arr,
+        levelName : req.body.levelName,
+        levelDesigner: req.body.levelDesigner
+    });
+}

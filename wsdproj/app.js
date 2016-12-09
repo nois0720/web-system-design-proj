@@ -10,6 +10,7 @@ var index = require('./app_server/routes/index');
 var users = require('./app_server/routes/users');
 var game = require('./app_server/routes/game');
 var makeGame = require('./app_server/routes/makeGame');
+var modifyGame = require('./app_server/routes/modifyGame');
 
 var mongoose = require('mongoose');
 
@@ -52,6 +53,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/game', game);
 app.use('/makeGame', makeGame);
+app.use('/modifyGame', modifyGame);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
