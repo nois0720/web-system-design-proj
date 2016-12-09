@@ -1,36 +1,60 @@
-<!doctype html>
-<html lang=en>
+<html>
 <head>
-    <meta charset=utf-8>
+    <title>CSS Layout demo</title>
+    <meta charset="utf-8">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
+        function getLevel(event){
+            var form = document.getElementById('_form');
+            var tr = event.target;
+            var target = tr.parentNode.childNodes[7];
+            var levelId = hiddenList[target.innerText].innerText;
 
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
+            console.log(levelId);
+            form.setAttribute('action','/game?levelId'+ levelId);
+            //form.submit();
 
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
         }
     </script>
-    <title>My HTML 5 Page</title>
 </head>
-<body>
-<div id="header">Header</div>
-<div id="main">Main</div>
-    <div id="dropcontainer" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-    <div id="dropcontainer" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-    <div id="dropcontainer" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-<div id="sidebar">Sidebar</div>
-    <img id="drag1" src="/images/arrow.png" draggable="true" ondragstart="drag(event)" width="64" height="64">
-    <img id="drag2" src="/images/arrow.png" draggable="true" ondragstart="drag(event)" width="64" height="64">
-<div id="footer">Footer
 
+<body>
+<div class="area" id="header">
+    <div class="scaffold">Header</div>
+</div>
+<div class="main area" id="sidebar1">
+    Side Menu
+</div>
+</div>
+
+<div class="main area" id="levelDesignMain">
+
+    <table>
+        <thead>
+        <tr>
+            <th class="td_first">No</th>
+            <th>Level Name</th>
+            <th class="td_third">Level Designer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i = 0;i < levelList.length;i++){ %>
+        <tr onclick="getLevel(event);">
+            <td class="td_first"><%=i+1%></td>
+            <td><%=levelList[i].levelName%></td>
+            <td class="td_third"><%=levelList[i].levelDesigner%></td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+    <form method="get" id="_form">
+        <% for(var i = 0;i < levelList.length;i++){ %>
+        <input class='LevelIdList' type="hidden" value="<%=levelList[i]._id%>">
+        <%}%>
+    </form>
+</div>
+<div class="area" id="footer">
+    <div class="scaffold">Footer</div>
 </div>
 </body>
 </html>

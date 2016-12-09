@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var gameCtrl = require('../controllers/gameController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', gameCtrl.getLevelList );
 
 module.exports = router;

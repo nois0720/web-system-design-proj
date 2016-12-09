@@ -187,11 +187,14 @@ function errorContorl() {
 }
 
 function checkIsValidCell() {
-    if (level[PC_posY_cell][PC_posX_cell] == 2) {
+    if( PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0  || PC_posY_cell < 0 ){
         isEnd = true;
-        alert("Fail!!!");
-    } else if (level[PC_posY_cell][PC_posX_cell] == 3) {
-        isEnd = true;
-        alert("Success");
+        alert('fail!!!');
     }
+    if (level[PC_posY_cell][PC_posX_cell] == 2 ) {
+        isEnd = true;
+        alert("fail!!!");
+    else if (level[PC_posY_cell][PC_posX_cell] == 3) {
+            isEnd = true;
+            alert("Success");
 }

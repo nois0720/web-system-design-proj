@@ -85,3 +85,14 @@ body {
     width:60%;
     float:left;
 }
+th, td {
+    border : 1px solid black;
+    width:200px;
+}
+.td_first{
+    text-align: center;
+    width:30px;
+}
+.td_third{
+    text-align: center;
+}
