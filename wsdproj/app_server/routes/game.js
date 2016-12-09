@@ -10,7 +10,7 @@ var session = require('express-session');
 var gameCtrl = require('../controllers/gameController');
 
 /* GET home page. */
-router.get('/',gameCtrl.startGame);
+router.post('/start',gameCtrl.startGame);
 
 router.post('/', function (req, res, next) {
     console.log("post" + JSON.stringify(req.body));

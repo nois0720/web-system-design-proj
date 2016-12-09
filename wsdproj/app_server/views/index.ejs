@@ -8,10 +8,15 @@
             var form = document.getElementById('_form');
             var tr = event.target;
             var target = tr.parentNode.childNodes[7];
-            var levelId = target.innerText;
+            var createTime = target.innerText;
 
-            console.log(levelId);
-            form.setAttribute('action','/game?levelId='+ levelId);
+            var el;
+            el = document.createElement("input");
+            el.type = "hidden";
+            el.name = "createTime";
+            el.value = createTime;
+            form.appendChild(el);
+            form.setAttribute('action','/game/start');
             form.submit();
 
         }
@@ -44,15 +49,12 @@
             <td class="td_first"><%=i+1%></td>
             <td><%=levelList[i].levelName%></td>
             <td class="td_third"><%=levelList[i].levelDesigner%></td>
-            <td style="display:none"><%=levelList[i]._id%></td>
+            <td style="display:none"><%=levelList[i].createTime%></td>
         </tr>
         <% } %>
         </tbody>
     </table>
-    <form method="get" id="_form">
-        <% for(var i = 0;i < levelList.length;i++){ %>
-        <input class='LevelIdList' type="hidden" value="<%=levelList[i]._id%>">
-        <%}%>
+    <form method="post" id="_form">
     </form>
 </div>
 <div class="area" id="footer">
