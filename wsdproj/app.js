@@ -9,7 +9,6 @@ var session = require('express-session');
 var index = require('./app_server/routes/index');
 var users = require('./app_server/routes/users');
 var game = require('./app_server/routes/game');
-var testCanvas = require('./app_server/routes/testCanvas');
 var makeGame = require('./app_server/routes/makeGame');
 
 var mongoose = require('mongoose');
@@ -28,7 +27,6 @@ mongoose.connect('mongodb://localhost/aigodb');
 app.use(session({
   secret: 'aigo-user',
   resave: false,
-  store: store,
   saveUninitialized: false
 }));
 
@@ -53,7 +51,6 @@ app.use(session({
 app.use('/', index);
 app.use('/users', users);
 app.use('/game', game);
-app.use('/testCanvas', testCanvas);
 app.use('/makeGame', makeGame);
 
 // catch 404 and forward to error handler

@@ -10,7 +10,7 @@ var state;
 
 function allowDrop(ev) {
     ev.preventDefault();
-}
+};
 
 function dragStart(ev) {
     if (ev.target.className === "origin") {
@@ -58,7 +58,7 @@ function dragEnter(ev) {
             ev.target.style.border = "1px dotted green";
         }
     }
-}s
+};
 
 function dragLeave(ev) {
     if (ev.target.className === "levelDesignCell") {
@@ -91,7 +91,7 @@ function changeImg(ev) {
 }
 
 function createImg(id) {
-    var imgPath = "images/" + id + ".png";
+    var imgPath = "/images/" + id + ".png";
     var img = document.createElement("IMG");
 
     img.setAttribute("id", id);
@@ -105,5 +105,36 @@ function createImg(id) {
 }
 
 function createLevel(){
-    //레벨 정보를 받아와서  DB에 저장함.
-};
+    var formElement = document.getElementsByTagName('form')[0];
+    var level_arr = [0];
+    var cellArea = document.getElementById('levelDesignMain');
+
+    var k=0;
+    for(var i=0;i<143;i++){
+        if(i%2==0 || i==17 || i== 35 || i== 53 || i== 71 || i==89 || i==107 || i==125) continue;
+            if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'PC') {
+                level_arr[k] = 1;
+            } else if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'obstacle') {
+                level_arr[k] = 2;
+            } else {
+                level_arr[k] = 0;
+            }
+            k++;
+    }
+
+    //console.log(level_arr.length);
+    //for(var i=0;i<64;i++){
+    //    console.log(level_arr[i]);
+    //}//
+
+    var el;
+    for (var i = 0; i < level_arr.length; i++) {
+        el = document.createElement("input");
+        el.type = "hidden";
+        el.name = "level_arr";
+        el.value = level_arr[i];
+        formElement.appendChild(el);
+    }
+    formElement.submit();
+    return false;
+}

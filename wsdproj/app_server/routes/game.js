@@ -4,21 +4,13 @@
 var express = require('express');
 var router = express.Router();
 var session = require('express-session');
-var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
-var uri = "mongodb://localhost:27017/aigodb";
-var mongoose = require('mongoose');
 
 // Use connect method to connect to the server
-MongoClient.connect(uri, function(err, db) { assert.equal(err, null);
-    console.log("Connected successfully to server"); db.close();
-});
+
+var gameCtrl = require('../controllers/gameController');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    console.log("get" + JSON.stringify(req.query));
-    res.render('game', {title: 'Express'});
-});
+router.get('/',gameCtrl.startGame);
 
 router.post('/', function (req, res, next) {
     console.log("post" + JSON.stringify(req.body));

@@ -75,8 +75,8 @@ body {
     float:left;
 }
 
-.levelDesignCell:nth-child(8n){
-    border:1px black dotted;
+.dummy{
+    border:1px black solid;
     width:32px;
     height:32px;
     float:none;
