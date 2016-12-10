@@ -5,29 +5,8 @@ var express = require('express');
 var router = express.Router();
 
 var AM = require('./../account-modules/account-manager');
-var EM = require('./../account-modules/email-dispatcher');
 
-router.post('/lost-password', function(req, res){
-    // look up the user's account via their email //
-    AM.getAccountByEmail(req.body['email'], function(o){
-        if (o){
-            EM.dispatchResetPasswordLink(o, function(e, m){
-                // this callback takes a moment to return //
-                // TODO add an ajax loader to give user feedback //
-                if (!e){
-                    res.status(200).send('ok');
-                }	else{
-                    for (k in e) console.log('ERROR : ', k, e[k]);
-                    res.status(400).send('unable to dispatch password reset');
-                }
-            });
-        }	else{
-            res.status(400).send('email-not-found');
-        }
-    });
-});
-
-router.get('/reset-password', function(req, res) {
+router.get('/', function(req, res) {
     var email = req.query["e"];
     var passH = req.query["p"];
     AM.validateResetLink(email, passH, function(e){
@@ -41,7 +20,7 @@ router.get('/reset-password', function(req, res) {
     })
 });
 
-router.post('/reset-password', function(req, res) {
+router.post('/', function(req, res) {
     var nPass = req.body['pass'];
     // retrieve the user's email from the session to lookup their account and reset password //
     var email = req.session.reset.email;
