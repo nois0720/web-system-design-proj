@@ -23,6 +23,7 @@
 <div class="main area" id="sidebar1">
     <div class="sidebar-top">
         <form  name="submitAnswer" onsubmit="getAnswer()" method="post">
+            <input type="hidden" name="createTime" value="<%=createTime%>">
             <input type="submit" value="submit">
         </form>
         <img class="origin" id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)"
