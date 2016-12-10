@@ -90,7 +90,7 @@ function changeImg(ev) {
 }
 
 function createImg(id) {
-    var imgPath = "images/" + id + ".png";
+    var imgPath = "/images/" + id + ".png";
     var img = document.createElement("IMG");
 
     img.setAttribute("id", id);
@@ -102,9 +102,6 @@ function createImg(id) {
 
     return img;
 }
-
-
-
 
 function getAnswer() {
     var formElement = document.getElementsByTagName('form')[0];
@@ -133,6 +130,7 @@ function getAnswer() {
         el.value = al_no[i];
         formElement.appendChild(el);
     }
+    formElement.setAttribute('action','/game');
     formElement.submit();
     return false;
 }

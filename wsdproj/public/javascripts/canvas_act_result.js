@@ -7,10 +7,10 @@ var cmdCode = {
 }
 
 var level = [
-    [0, 0, 2, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0],
-    [0, 2, 2, 0, 0, 0, 0, 0],
-    [0, 0, 2, 0, 0, 0, 0, 0],
+    [0, 0, 2, 2, 0, 0, 0, 0],
+    [0, 1, 0, 2, 0, 0, 0, 0],
+    [0, 2, 2, 2, 0, 0, 0, 0],
+    [3, 2, 0, 0, 0, 0, 0, 0],
     [0, 2, 2, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -36,7 +36,7 @@ var PC_posY = 0;
 var obstaclePosArr = new Array(); //obstacle position
 var PC_angle = 0;
 var PC_dir = Dir.up;
-var isFail = false;
+var isEnd = false;
 
 var parseLevel = function () {
     for (var i = 0; i < 8; i++) {
@@ -47,6 +47,9 @@ var parseLevel = function () {
             } else if (level[i][j] == 2) {
                 var obs = {obs_posX: j, obs_posY: i};
                 obstaclePosArr.push(obs);
+            } else if (level[i][j] == 3) {
+                GOAL_posX = j * cellWidth;
+                GOAL_posY = i * cellHeight;
             } else {
                 continue;
             }
@@ -81,7 +84,7 @@ function startLogic() {
 })();
 
 function startCmdProcess(index) {
-    if (isFail) {
+    if (isEnd) {
         return;
     }
     if (commandList[index].innerHTML == '1') {
@@ -98,6 +101,8 @@ function startCmdProcess(index) {
 function stopCmdProcess(index) {
     clearInterval(intervalList[index]);
     if (commandList[index].innerHTML == cmdCode.move) {
+        errorContorl();
+
         if (PC_dir == Dir.left) {
             PC_posX_cell--;
         } else if (PC_dir == Dir.right) {
@@ -107,9 +112,7 @@ function stopCmdProcess(index) {
         } else {
             PC_posY_cell++;
         }
-
         checkIsValidCell();
-
         console.log("pc_x_cell : " + PC_posX_cell + " pc_y_cell : " + PC_posY_cell);
     } else if (commandList[index].innerHTML == cmdCode.turnLeft) {
         PC_dir = (PC_dir + 1) % 4;
@@ -117,10 +120,10 @@ function stopCmdProcess(index) {
 }
 
 function move() {
-    if (PC_dir == Dir.left)  PC_posX--;
+    if (PC_dir == Dir.left) PC_posX--;
     if (PC_dir == Dir.right) PC_posX++;
-    if (PC_dir == Dir.up)  PC_posY--;
-    if (PC_dir == Dir.down)  PC_posY++;
+    if (PC_dir == Dir.up) PC_posY--;
+    if (PC_dir == Dir.down) PC_posY++;
 
     draw();
 }
@@ -137,10 +140,15 @@ var context = canvas.getContext('2d');
 var level_img = new Image();
 var PC_img = new Image();
 var obstacle_img = new Image();
+var goal_img = new Image();
 
-level_img.src = "/images/testLevel_jpeg.jpg";
+level_img.src = "/images/levelTable.png";
 PC_img.src = "/images/PC.png";
 obstacle_img.src = "/images/obstacle.png";
+goal_img.src = "/images/flag.png";
+
+var GOAL_posX;
+var GOAL_posY;
 
 function draw() {
     // Clear Canvas
@@ -151,6 +159,7 @@ function draw() {
     for (var i = 0; i < obstaclePosArr.length; i++) {
         context.drawImage(obstacle_img, obstaclePosArr[i].obs_posX * cellWidth + 1.5, obstaclePosArr[i].obs_posY * cellHeight + 1, 28, 28);
     }
+    context.drawImage(goal_img, GOAL_posX, GOAL_posY, cellWidth, cellHeight);
     // Draw Main Character
     context.save();
     context.translate(PC_posX + cellWidth / 2, PC_posY + cellHeight / 2);
@@ -160,9 +169,36 @@ function draw() {
     context.restore();
 }
 
-function checkIsValidCell() {
-    if (level[PC_posY_cell][PC_posX_cell] == 2) {
-        isFail = true;
-        alert("fail!!!");
+function errorContorl() {
+    var remainX = PC_posX % cellWidth;
+    var remainY = PC_posY % cellHeight;
+
+    if(remainX > 16) {
+        PC_posX += (cellWidth - remainX);
+    } else if(PC_posX < 16) {
+        PC_posX -= remainX;
     }
+
+    if(remainY > 16) {
+        PC_posY += (cellHeight - remainY);
+    } else if(PC_posY < 16) {
+        PC_posY -= remainY;
+    }
+}
+
+function checkIsValidCell() {
+
+    if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0) {
+        isEnd = true;
+        alert('fail!!!');
+    }
+    if (level[PC_posY_cell][PC_posX_cell] == 2) {
+        isEnd = true;
+        alert("Fail!!!");
+    } else if (level[PC_posY_cell][PC_posX_cell] == 3) {
+        isEnd = true;
+        alert("Success");
+
+    }
+
 }
