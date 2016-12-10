@@ -8,6 +8,7 @@
     <meta name="author" content="">
     <!-- Le styles -->
     <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -113,15 +114,16 @@
         <tr>
             <th class="td_first">No</th>
             <th>Level Name</th>
-            <th class="td_third">Level Designer</th>
+            <th>Level Designer</th>
             <th style="display:none"></th>
         </tr>
         </thead>
-        <tbody>
-        <tr onclick="getLevel(event);">
-            <td class="td_first">11</td>
-            <td>lv name</td>
-            <td> designer</td>
+        <tbody> 
+        <tr onclick="getLevel(event);"> 
+            <td>1</td>
+            <td><%= levelList[0].levelName %></td>
+            <td><%= levelList[0].levelDesigner %></td>
+            <td style="display:none"><%= levelList[0].createTime %></td>
         </tr>
         </tbody>
     </table>
