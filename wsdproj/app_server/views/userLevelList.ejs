@@ -1,3 +1,4 @@
+<!-- 특정 유저로 로그인 상태에서 그 유저의 레벨 리스트를 불러옴-->
 <html>
 <head>
     <title>CSS Layout demo</title>
@@ -9,7 +10,7 @@
         }
     </style>
     <script>
-        function getLevel(event) {
+        function getLevel(event){
             var form = document.getElementById('_form');
             var tr = event.target;
             var target = tr.parentNode.childNodes[7];
@@ -21,8 +22,9 @@
             el.name = "createTime";
             el.value = createTime;
             form.appendChild(el);
-            form.setAttribute('action', '/game/start');
+            form.setAttribute('action','/modifyGame/userLevel');
             form.submit();
+
         }
     </script>
 </head>

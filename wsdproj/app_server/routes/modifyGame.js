@@ -7,10 +7,14 @@ var router = express.Router();
 var levelCtrl = require('../controllers/levelController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('modify_game', { title: 'Express'});
-});
+
+
+router.get('/', levelCtrl.getLevelListByUserId);
+
+router.post('/userLevel', levelCtrl.getLevelByUserId);
 
 router.post('/updateLevel', levelCtrl.updateLevel);
+
+router.post('/deleteLevel', levelCtrl.deleteLevel);
 
 module.exports = router;

@@ -116,6 +116,8 @@ function createLevel(){
                 level_arr[k] = 1;
             } else if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'obstacle') {
                 level_arr[k] = 2;
+            } else if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'flag') {
+                level_arr[k] = 3;
             } else {
                 level_arr[k] = 0;
             }
@@ -135,6 +137,10 @@ function createLevel(){
         el.value = level_arr[i];
         formElement.appendChild(el);
     }
+    console.log(level_arr);
+    
     formElement.submit();
-    return false;
 }
+
+
+
