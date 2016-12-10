@@ -12,7 +12,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('test.jade', { title: 'Express'});
+    res.render('bootStrapTest.jade', { title: 'Express'});
 });
 
 module.exports = router;
