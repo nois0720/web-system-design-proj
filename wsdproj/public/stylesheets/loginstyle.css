@@ -71,6 +71,10 @@ h6 {
     width: 320px;
 }
 
+#login input {
+    width : 80%;
+}
+
 #login .controls {
     margin-top: 20px;
 }
@@ -108,7 +112,7 @@ h6 {
 	modal windows
 */
 .modal .modal-dialog {
-    width: 480px;
+    width: auto;
 }
 
 .modal .form-group {
@@ -129,6 +133,10 @@ h6 {
 .modal p {
     margin: 0;
     padding: 0;
+}
+
+.modal input {
+    width : 80%;
 }
 
 .modal .modal-footer button {
@@ -161,3 +169,4 @@ h6 {
 .form-horizontal select {
     height: 25px;
 }
+
