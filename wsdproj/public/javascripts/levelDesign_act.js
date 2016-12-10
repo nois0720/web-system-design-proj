@@ -104,7 +104,7 @@ function createImg(id) {
     return img;
 }
 
-function createLevel(){
+function createNewLevel(){
     var formElement = document.getElementsByTagName('form')[0];
     var level_arr = [0];
     var cellArea = document.getElementById('levelDesignMain');
