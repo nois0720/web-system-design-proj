@@ -59,7 +59,7 @@ module.exports.getLevelList = function(req, res){
             console.log('err : ' + err);
             res.render('error', {message : err});
         } else if(obj.length==0){
-            res.render('error', {message : 'levelList does not exist!! lololololol'});
+            res.render('index', {levelList : []});
         }
         else {
             res.render('index', { levelList: obj});

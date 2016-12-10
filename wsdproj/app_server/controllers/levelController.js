@@ -23,7 +23,6 @@ module.exports.createLevel = function(req, res){
         levelName : req.body.levelName,
         levelDesigner: req.session.user.user
     });
-
     callbackSave(level, function(){
         Level.find({}, function(err, obj){
             if (err) {
