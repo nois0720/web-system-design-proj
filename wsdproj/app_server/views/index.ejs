@@ -1,13 +1,42 @@
-<html>
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://getbootstrap.com/2.3.2/examples/hero.html -->
+<html lang="en">
 <head>
-    <title>CSS Layout demo</title>
-    <meta charset="utf-8">
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Aigo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap.css" rel="stylesheet">
+
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
         .indexLevelList:hover{
-            background-color: yellow;
+            background-color: #c09853;
         }
     </style>
+    <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="/bootstrap-2.3.2/docs/assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed"
+          href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="http://getbootstrap.com/2.3.2/assets/ico/favicon.png">
+
     <script>
         function getLevel(event) {
             var form = document.getElementById('_form');
@@ -27,43 +56,95 @@
     </script>
 </head>
 
+<!------- end head ------->
+
 <body>
-<div class="area" id="header">
-    <div class="scaffold">Header</div>
-</div>
-<div class="main area" id="sidebar1">
-    Side Menu
-</div>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Aigo</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="/bootstrap">About</a></li>
+                    <li><a href="/bootstrap">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="http://getbootstrap.com/2.3.2/examples/hero.html#" class="dropdown-toggle"
+                           data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="divider"></li>
+                            <li class="nav-header">My Menu</li>
+                            <li><a href="/makeGame">Create Game</a></li>
+                            <li><a href="/modifyGame">Modify Game</a></li>
+                            <li><a href="/">Modify Info</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form pull-right" method="get" action="/">
+                    <button type="submit" class="btn btn-lg">Sign in</button>
+                    <button type="submit" class="btn btn-lg btn-success">Logout</button>
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
 </div>
 
-<div class="main area" id="levelDesignMain">
+<div class="container">
 
-    <table>
-        <thead>
-        <tr>
-            <th class="td_first">No</th>
-            <th>Level Name</th>
-            <th class="td_third">Level Designer</th>
-            <th style="display:none"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for(var i = 0;i < levelList.length;i++){ %>
-        <tr class='indexLevelList' onclick="getLevel(event);">
-            <td class="td_first"><%=i+1%></td>
-            <td><%=levelList[i].levelName%></td>
-            <td class="td_third"><%=levelList[i].levelDesigner%></td>
-            <td style="display:none"><%=levelList[i].createTime%></td>
-        </tr>
-        <% } %>
+    <!-- Main hero unit for a primary marketing message or call to action -->
+    <div id="levelDesignMain">
 
-        </tbody>
-    </table>
-    <form method="post" id="_form">
-    </form>
-</div>
-<div class="area" id="footer">
-    <div class="scaffold">Footer</div>
-</div>
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th class="td_first">No</th>
+                <th>Level Name</th>
+                <th class="td_third">Level Designer</th>
+                <th style="display:none"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(var i = 0;i < levelList.length;i++){ %>
+            <tr class='indexLevelList' onclick="getLevel(event);">
+                <td class="td_first"><%=i+1%></td>
+                <td><%=levelList[i].levelName%></td>
+                <td class="td_third"><%=levelList[i].levelDesigner%></td>
+                <td style="display:none"><%=levelList[i].createTime%></td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <form method="post" id="_form">
+        </form>
+    </div>
+
+    <footer>
+        <p>© Company 2013</p>
+    </footer>
+
+</div> <!-- /container -->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/bootstrap-2.3.2/docs/assets/js/jquery.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-transition.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-alert.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-modal.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-dropdown.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-scrollspy.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tab.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tooltip.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-popover.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-button.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-collapse.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-carousel.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-typeahead.js"></script>
 </body>
 </html>
