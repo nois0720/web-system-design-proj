@@ -8,6 +8,9 @@ var AM = require('./../account-modules/account-manager');
 
 router.get('/', function(req, res){
     // check if the user's credentials are saved in a cookie //
+    if( req.session.user) res.redirect('/');
+
+
     if (req.cookies.user == undefined || req.cookies.pass == undefined){
         res.render('login.jade', { title: 'Hello - Please Login To Your Account' });
     }	else{
