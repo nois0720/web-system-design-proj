@@ -51,8 +51,8 @@ module.exports.gameResult = function (req, res) {
 };
 
 module.exports.getLevelList = function (req, res) {
-    var user;
-    if (req.session && req.session.user.user) {
+    var user = "";
+    if (req.session.user) {
         user = req.session.user.user;
     } else if (req.query.user) {
         user = req.query.user;
