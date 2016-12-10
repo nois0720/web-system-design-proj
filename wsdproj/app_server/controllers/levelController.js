@@ -17,6 +17,7 @@ var callbackSave = function(model, callback){
 }
 
 module.exports.createLevel = function(req, res){
+
     var level = new Level({
         createTime: req.body.createTime,
         levelTable : req.body.level_arr,
