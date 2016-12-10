@@ -104,8 +104,7 @@ function createImg(id) {
 }
 
 function getAnswer() {
-    var formElement = document.getElementsByTagName('form')[0];
-    var answerElement = document.getElementById('sidebar2');
+    var formElement = document.getElementById('submitAnswer');
     var answerDiv = document.getElementsByClassName('droptarget');
 
     var al_no = new Array();

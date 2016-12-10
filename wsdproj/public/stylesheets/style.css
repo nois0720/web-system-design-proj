@@ -33,7 +33,6 @@ body {
 
 .main {
     Height: 70%;
-    Float: left;
 }
 
 .sidebar-top {
@@ -48,19 +47,6 @@ body {
 
 #header {
     Height: 10%;
-}
-
-#content {
-    Width: 39%;
-}
-
-#sidebar1 {
-    Width: 30%;
-}
-
-#sidebar2 {
-    Width: 30%;
-    Float: right;
 }
 
 #footer {
@@ -82,17 +68,6 @@ body {
     float:none;
 }
 #levelDesignMain{
-    width:60%;
+    width:auto;
     float:left;
-}
-th, td {
-    border : 1px solid black;
-    width:200px;
-}
-.td_first{
-    text-align: center;
-    width:30px;
-}
-.td_third{
-    text-align: center;
 }
