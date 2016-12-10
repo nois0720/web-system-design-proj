@@ -11,6 +11,7 @@ var Level = require('../models/level');
 module.exports.startGame = function (req, res) {
 
     var createTime = req.body.createTime;
+    console.log("asdfadfsa" + createTime)
     var level = new Level();
 
     Level.findOne({createTime:createTime }, function (err, obj) {
@@ -22,7 +23,7 @@ module.exports.startGame = function (req, res) {
             res.render('error');
         }
         else {
-            console.log(obj);
+            console.log(obj.createTime);
             res.render('game', {title: 'Express', level: obj.levelTable, createTime : obj.createTime});
         }
     });
@@ -58,7 +59,7 @@ module.exports.getLevelList = function(req, res){
             console.log('err : ' + err);
             res.render('error', {message : err});
         } else if(obj.length==0){
-            res.render('error', {message : 'levelList does not exist!! lololololol'});
+            res.render('index', {levelList : []});
         }
         else {
             res.render('index', { levelList: obj});

@@ -23,7 +23,6 @@ module.exports.createLevel = function(req, res){
         levelName : req.body.levelName,
         levelDesigner: req.session.user.user
     });
-    console.log(req.body);
     callbackSave(level, function(){
         Level.find({}, function(err, obj){
             if (err) {
@@ -122,7 +121,7 @@ module.exports.deleteLevel = function(req, res){
             console.log('err : ' + err);
             res.render('error', {message: err});
         } else if (obj.length == 0) {
-            res.render('error', {message: 'levelList does not exist!! lololololol'});
+            res.render('userLevelList',{levelList: []});
         }
         else {
             res.render('userLevelList', {title: 'levelList', levelList: obj});
