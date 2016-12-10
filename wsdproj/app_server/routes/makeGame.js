@@ -11,7 +11,7 @@ var levelCtrl = require('../controllers/levelController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('make_game', { title: 'Express'});
+    res.render('make_game', { levelDesigner: req.session.user.user});
 });
 
 router.post('/createLevel', levelCtrl.createLevel);

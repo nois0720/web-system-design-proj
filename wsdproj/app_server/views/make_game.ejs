@@ -38,7 +38,7 @@
     <br><br>
     <form action="/makeGame/createLevel" method="post" onsubmit="createLevel();">
         Level Name : <input type="text" name="levelName" placeholder="1-2"><br>
-        Designer   : <input type="text" name="levelDesigner" placeholder="NDY"><br>
+        Designer   : <%=levelDesigner%><br>
         <input type="hidden" name="createTime" id="create_time">
         <input type="submit" value="create">
     </form>

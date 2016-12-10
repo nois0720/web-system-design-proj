@@ -39,7 +39,7 @@
 
     <form action="/modifyGame/updateLevel" method="post" onsubmit="createLevel()">
         Level Name : <input type="text" name="levelName" placeholder="<%=level.levelName%>"><br>
-        Designer   : <input type="text" name="levelDesigner" placeholder="<%=level.levelDesigner%>"><br>
+        Designer   : <%=level.levelDesigner%>  <br>
         <input type="hidden" name="createTime" id="create_time" value="<%=level.createTime%>">
         <input type="submit" value="modify">
     </form>
