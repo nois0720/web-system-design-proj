@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script>
-        function getLevel(event){
+        function getLevel(event) {
             var form = document.getElementById('_form');
             var tr = event.target;
             var target = tr.parentNode.childNodes[7];
@@ -16,9 +16,8 @@
             el.name = "createTime";
             el.value = createTime;
             form.appendChild(el);
-            form.setAttribute('action','/game/start');
+            form.setAttribute('action', '/game/start');
             form.submit();
-
         }
     </script>
 </head>
@@ -46,10 +45,10 @@
         <tbody>
         <% for(var i = 0;i < levelList.length;i++){ %>
         <tr onclick="getLevel(event);">
-            <td class="td_first"><%=i+1%></td>
-            <td><%=levelList[i].levelName%></td>
-            <td class="td_third"><%=levelList[i].levelDesigner%></td>
-            <td style="display:none"><%=levelList[i].createTime%></td>
+            <td class="td_first"><%= i+1 %></td>
+            <td><%= levelList[i].levelName %></td>
+            <td class="td_third"><%= levelList[i].levelDesigner %></td>
+            <td style="display:none"><%= levelList[i].createTime %></td>
         </tr>
         <% } %>
         </tbody>
