@@ -21,7 +21,7 @@ module.exports.createLevel = function(req, res){
         createTime: req.body.createTime,
         levelTable : req.body.level_arr,
         levelName : req.body.levelName,
-        levelDesigner: req.body.levelDesigner
+        levelDesigner: req.session.user.user
     });
     console.log(req.body);
     callbackSave(level, function(){
@@ -40,8 +40,8 @@ module.exports.createLevel = function(req, res){
 }
 //user id를 통해서 유저의 레벨리스트를 받아옴
 module.exports.getLevelListByUserId = function(req , res){
-    //var userId = req.session.userId;
-    Level.find({/*, userId:userId*/ }, function (err, obj) {
+    var levelDesigner = req.session.user.user;
+    Level.find({levelDesigner:levelDesigner }, function (err, obj) {
         if (err) {
             res.render('error', {message : err});
         }
@@ -58,8 +58,8 @@ module.exports.getLevelListByUserId = function(req , res){
 
 module.exports.getLevelByUserId = function(req , res){
     var createTime = req.body.createTime; //원래는 req.body.createTime;
-    //var userId = req.session.userId;
-    Level.findOne({createTime:createTime /*, userId:userId*/ }, function (err, obj) {
+    var levelDesigner = req.session.user.user;
+    Level.findOne({createTime:createTime,levelDesigner:levelDesigner }, function (err, obj) {
         if (err) {
             res.render('error', {message : err});
         }
@@ -89,14 +89,14 @@ module.exports.updateLevel = function(req, res){
         createTime: req.body.createTime,
         levelTable : req.body.level_arr,
         levelName : req.body.levelName,
-        levelDesigner: req.body.levelDesigner
+        levelDesigner: req.session.user.user
     });
 
     Level.update({createTime:level.createTime}, {$set:{levelName:level.levelName, levelDesigner:level.levelDesigner, levelTable:level.levelTable}}, function(err, doc) {
 
     });
 
-    Level.find({/*userId를 통해서 리스트를 받아와야함*/}, function (err, obj) {
+    Level.find({levelDesigner:req.session.user.user}, function (err, obj) {
         if (err) {
             console.log('err : ' + err);
             res.render('error', {message: err});
@@ -113,7 +113,7 @@ module.exports.updateLevel = function(req, res){
 module.exports.deleteLevel = function(req, res){
     var createTime = req.body.createTime;
     console.log(createTime);
-    Level.remove({ createTime: createTime }, function(err) {
+    Level.remove({ createTime: createTime, levelDesigner:req.session.user.user }, function(err) {
 
     });
 

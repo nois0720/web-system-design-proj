@@ -53,7 +53,6 @@ module.exports.gameResult = function(req, res){
 
 module.exports.getLevelList = function(req, res){
     var level = new Level();
-
     Level.find({}, function(err, obj){
         if (err) {
             console.log('err : ' + err);
@@ -62,7 +61,7 @@ module.exports.getLevelList = function(req, res){
             res.render('error', {message : 'levelList does not exist!! lololololol'});
         }
         else {
-            res.render('index', {title: 'levelList', levelList: obj});
+            res.render('index', { levelList: obj});
         }
     });
 };
