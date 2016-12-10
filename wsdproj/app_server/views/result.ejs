@@ -1,56 +1,171 @@
 <html>
 <head>
-    <title>CSS Layout demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Aigo</title>
+    <!-- Le styles -->
     <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <style>
+    <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        h2 {
+            text-align: center;
+        }
+
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
         #content {
             border: 3px solid black;
             width: 320px;
             height: 420px;
             float: left
         }
+
+        #gameplay {
+            position: relative;
+            top: 10%;
+        }
+
+        .span4 {
+            text-align: center;
+            align-content: center;
+        }
+
+        .main {
+            Height: 70%;
+        }
+
+        .sidebar-top {
+            Height: 80%;
+            border: 1px solid black;
+        }
+        #levelDesignMain{
+            width:auto;
+            float:left;
+        }
+
+        .droptarget {
+            height: 18%;
+            position: relative;
+        }
     </style>
-    <script src="javascripts/ui_act.js"></script>
+    <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/javascripts/ui_act.js"></script>
+
 </head>
 
 <body>
-<div class="area" id="header">
-    <div class="scaffold">Header</div>
-</div>
-<div class="main area" id="content">
-    <canvas id='myCanvas' width=256px height=256px></canvas>
-</div>
-<div class="main area" id="sidebar1">
-    <form action='/game' name="submitAnswer" onsubmit="getAnswer()" method="post">
-        <input type="submit" value="submit">
-    </form>
-    <img class="origin" id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)" width="64"
-         height="64">
-    </br>
-    <img class="origin" id="rotate" src="/images/rotate.png" draggable="true" ondragstart="dragStart(event)" width="64"
-         height="64">
-</div>
-<div class="main area" id="sidebar2">
-    <% for(var i = 0;i < 10;i++){ %>
-    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-         ondragover="allowDrop(event)" areastate="clear"></div>
-    <% } %>
-</div>
-<div class="area" id="footer">
-    <div class="scaffold">Footer</div>
-    <div style="display:none">
-        <ul>
-            <% for (var i in arr) { %>
-            <li class="commandList"><%= arr[i] %></li>
-            <% } %>
-        </ul>
-        <ul>
-            <% for (var i in levelTable) { %>
-            <li class="levelTable"><%= levelTable[i] %></li>
-            <% } %>
-        </ul>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Aigo</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="/bootstrap">About</a></li>
+                    <li><a href="/bootstrap">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="http://getbootstrap.com/2.3.2/examples/hero.html#" class="dropdown-toggle"
+                           data-toggle="dropdown">Menu <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="divider"></li>
+                            <li class="nav-header">My Menu</li>
+                            <li><a href="/makeGame">Create Game</a></li>
+                            <li><a href="/modifyGame">Modify Game</a></li>
+                            <li><a href="/">Modify Info</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form pull-right" method="get" action="/">
+                    <button type="submit" class="btn btn-lg">Sign in</button>
+                    <button type="submit" class="btn btn-lg btn-success">Logout</button>
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
     </div>
 </div>
-<script src="javascripts/canvas_act_result.js"></script>
+
+<div class="container" id="gameplay">
+    <div class="row">
+        <div class="span4">
+            <h2>Level View</h2>
+            <canvas id='myCanvas' width=256px height=256px></canvas>
+        </div>
+        <div class="span4 main" id="ui-bar">
+            <h2>UI</h2>
+            <div class="sidebar-top">
+                <img class="origin" id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)" width="64"
+                     height="64">
+                </br>
+                <img class="origin" id="rotate" src="/images/rotate.png" draggable="true" ondragstart="dragStart(event)" width="64"
+                     height="64">
+                </br>
+                </br>
+                <form action='/game' name="submitAnswer" onsubmit="getAnswer()" method="post">
+                    <input type="submit" value="submit">
+                </form>
+            </div>
+            <div class="sidebar-bottom">
+                <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
+                     ondrop="dropDelete(event)"
+                     ondragover="allowDrop(event)" droppable="true"></div>
+            </div>
+        </div>
+        <div class="span4">
+            <h2>Sequence</h2>
+            <div class="main area" id="sidebar2">
+                <% for(var i = 0;i < 10;i++){ %>
+                <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+                     ondragover="allowDrop(event)" areastate="clear"></div>
+                <% } %>
+            </div>
+        </div>
+        <div class="area" id="footer" style="display:none">
+            <ul>
+                <% for (var i in arr) { %>
+                <li class="commandList"><%= arr[i] %></li>
+                <% } %>
+            </ul>
+            <ul>
+                <% for (var i in levelTable) { %>
+                <li class="levelTable"><%= levelTable[i] %></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <hr>
+
+    <footer>
+        <p>© Company 2013</p>
+    </footer>
+</div>
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/bootstrap-2.3.2/docs/assets/js/jquery.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-transition.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-alert.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-modal.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-dropdown.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-scrollspy.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tab.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tooltip.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-popover.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-button.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-collapse.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-carousel.js"></script>
+<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-typeahead.js"></script>
+
+<script src="/javascripts/canvas_act_result.js"></script>
 </body>
 </html>
