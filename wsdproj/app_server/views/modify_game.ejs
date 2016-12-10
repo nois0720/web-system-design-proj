@@ -2,53 +2,158 @@
 <head>
     <title>CSS Layout demo</title>
     <meta charset="utf-8">
+    <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap.css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <style>
         #content {border: 3px solid black;width:320px;height:420px; float:left}
+
+        .mainarea{
+            position:relative;
+            float:left;
+        }
+        #_footer{
+            position:relative;
+            clear:both;
+        }
+        #_contents{
+            position:relative;
+            top:10%;
+        }
+        #leveldesignmain{
+            position:relative;
+            width:100%;
+            float:left;
+        }
+        #sidebar1{
+            position:relative;
+            width:100%;
+            height:55%;
+
+        }
+        .sidebar-top {
+            position:relative;
+            width:80%;
+            Height:40%;
+            border: 1px solid black;
+        }
+        .sidebar-bottom {
+            position:relative;
+            width:80%;
+            Height:40%;
+            border: 1px solid black;
+            background-color: #4bb1cf;
+        }
+
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        #content {
+            Width: 39%;
+        }
+
+
+        #sidebar2 {
+            Width: 30%;
+            Float: right;
+        }
     </style>
+
+    <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
     <script src="/javascripts/levelDesign_act.js"></script>
 </head>
 
 <body>
-<div class="area" id="header">
-    <div class="scaffold">Header</div>
-</div>
-<div class="main area" id="sidebar1">
-    <div class="sidebar-top">
-        <img class="origin" id="obstacle" src="/images/obstacle.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
-        <img class="origin" id="PC" src="/images/PC.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
-        <img class="origin" id="flag" src="/images/flag.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Aigo</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="/bootstrap">About</a></li>
+                    <li><a href="/bootstrap">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="http://getbootstrap.com/2.3.2/examples/hero.html#" class="dropdown-toggle"
+                           data-toggle="dropdown">Menu <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="divider"></li>
+                            <li class="nav-header">My Menu</li>
+                            <li><a href="/makeGame">Create Game</a></li>
+                            <li><a href="/modifyGame">Modify Game</a></li>
+                            <li><a href="/">Modify Info</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form pull-right" method="get" action="/">
+                    <button type="submit" class="btn btn-lg">Sign in</button>
+                    <button type="submit" class="btn btn-lg btn-success">Logout</button>
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
     </div>
-    <div class="sidebar-bottom">
-        <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
-             ondragover="allowDrop(event)" areastate="clear"></div>
+</div>
+
+<div class="container" id="_contents">
+    <div class="row">
+
+        <div class="span4">
+            <h2>Heading</h2>
+            <div class="main" id="_contents">
+                <div class="sidebar-top">
+                <img class="origin" id="obstacle" src="/images/obstacle.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
+                <img class="origin" id="PC" src="/images/PC.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
+                <img class="origin" id="flag" src="/images/flag.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
+            </div>
+            <div class="sidebar-bottom">
+                <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
+                    ondragover="allowDrop(event)" areastate="clear"></div>
+            </div>
+        </div>
     </div>
+
+    <div class="span4">
+        <h2>Heading</h2>
+        <div class="main" id="levelDesignMain"  ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
+            ondragover="allowDrop(event)" areastate="clear">
+            <% for(var i=0;i<8;i++) {%>
+                <%for(var j=0;j<8;j++) {%>
+                        <div id=cell<%=i*8+j%> class="levelDesignCell" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+                         ondragover="allowDrop(event)" areastate="clear"></div>
+                <%}%>
+            <div class="dummy"></div>
+            <%}%>
+            <br>
+        </div>
+    </div>
+    <div class="span4">
+        <br><br><br><br>
+        <hr>
+        <form id="_form" action="/modifyGame/updateLevel" method="post" onsubmit="createLevel()">
+            Level Name : <input type="text" name="levelName" placeholder="<%=level.levelName%>"><br>
+            Designer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  : <%=level.levelDesigner%>  <br>
+            <input type="hidden" name="createTime" id="create_time" value="<%=level.createTime%>">
+            <br><br>
+            <input class="btn btn-lg btn-success" type="submit" value="modify">
+        </form>
+        <form id="deleteForm" action="/modifyGame/deleteLevel" method="post" onsubmit="deleteLevel()">
+            <input type="hidden" name="createTime" value="<%=level.createTime%>">
+            <input class="btn btn-lg btn-danger" type="submit" value="delete">
+        </form>
+        <hr>
+    </div>
+ <footer id="_footer">
+    <p>© Company 2013</p>
+ </footer>
+ </div>
 </div>
 
-</div>
-<div class="main area" id="levelDesignMain"  ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
-     ondragover="allowDrop(event)" areastate="clear">
-    <% for(var i=0;i<8;i++) {%>
-        <%for(var j=0;j<8;j++) {%>
-                <div id=cell<%=i*8+j%> class="levelDesignCell" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
-                 ondragover="allowDrop(event)" areastate="clear"></div>
-        <%}%>
-    <div class="dummy"></div>
-    <%}%>
-    <br><br>
 
-    <form id="_form" action="/modifyGame/updateLevel" method="post" onsubmit="createLevel()">
-        Level Name : <input type="text" name="levelName" placeholder="<%=level.levelName%>"><br>
-        Designer   : <%=level.levelDesigner%>  <br>
-        <input type="hidden" name="createTime" id="create_time" value="<%=level.createTime%>">
-        <input type="submit" value="modify">
-    </form>
-    <form id="deleteForm" action="/modifyGame/deleteLevel" method="post" onsubmit="deleteLevel()">
-        <input type="hidden" name="createTime" value="<%=level.createTime%>">
-        <input type="submit" value="delete">
-    </form>
-
-</div>
 <script>
     var levelTable = new Array();
     <%for(var i=0;i<64;i++) {%>
@@ -99,8 +204,19 @@
         }
     }
 </script>
-<div class="area" id="footer">
-    <div class="scaffold">Footer</div>
-</div>
+    <script src="/bootstrap-2.3.2/docs/assets/js/jquery.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-transition.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-alert.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-modal.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-dropdown.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tab.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tooltip.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-popover.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-button.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-collapse.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-carousel.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-typeahead.js"></script>
+
 </body>
 </html>
