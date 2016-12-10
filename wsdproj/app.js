@@ -1,3 +1,12 @@
+// app.locals.pretty = true;
+// app.set('port', process.env.PORT || 3000);
+// build mongo database connection url //
+// var dbHost = process.env.DB_HOST || 'localhost'
+// var dbPort = process.env.DB_PORT || 27017;
+// var dbName = process.env.DB_NAME || 'node-login';
+
+// var dbURL = 'mongodb://'+dbHost+':'+dbPort+'/'+dbName;
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,8 +20,17 @@ var users = require('./app_server/routes/users');
 var game = require('./app_server/routes/game');
 var makeGame = require('./app_server/routes/makeGame');
 var modifyGame = require('./app_server/routes/modifyGame');
+var test = require('./app_server/routes/test');
+var login = require('./app_server/routes/login');
+var logout = require('./app_server/routes/logout');
+var resetPassword = require('./app_server/routes/resetPassword');
+var lostPassword = require('./app_server/routes/lostPassword');
+var signup = require('./app_server/routes/signup');
 
 var mongoose = require('mongoose');
+
+var errorHandler = require('errorhandler');
+var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
@@ -33,15 +51,17 @@ app.use(session({
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server','views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('stylus').middleware({ src: __dirname + 'public' }));
 
 app.use(session({
   secret:'keyboard cat',
@@ -54,6 +74,12 @@ app.use('/users', users);
 app.use('/game', game);
 app.use('/makeGame', makeGame);
 app.use('/modifyGame', modifyGame);
+app.use('/test', test);
+app.use('/login', login);
+app.use('/logout', logout);
+app.use('/reset-password', resetPassword);
+app.use('/lost-password', lostPassword);
+app.use('/signup', signup);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

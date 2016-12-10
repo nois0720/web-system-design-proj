@@ -5,7 +5,6 @@
 	* Copyright (c) 2013-2016 Stephen Braitsch
 **/
 
-var http = require('http');
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -46,7 +45,3 @@ app.use(session({
 );
 
 require('./app/server/routes')(app);
-
-http.createServer(app).listen(app.get('port'), function(){
-	console.log('Express server listening on port ' + app.get('port'));
-});
