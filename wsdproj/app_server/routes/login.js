@@ -15,7 +15,6 @@ router.get('/', function(req, res){
         AM.autoLogin(req.cookies.user, req.cookies.pass, function(o){
             if (o != null){
                 req.session.user = o;
-
                 res.redirect('/home');
             }	else{
                 res.render('login.jade', { title: 'Hello - Please Login To Your Account' });

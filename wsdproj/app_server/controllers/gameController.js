@@ -14,55 +14,62 @@ module.exports.startGame = function (req, res) {
 
     var level = new Level();
 
-    Level.findOne({createTime:createTime }, function (err, obj) {
+    Level.findOne({createTime: createTime}, function (err, obj) {
         if (err) {
             console.log('err : ' + err);
-            res.render('error', {message : err});
+            res.render('error', {message: err});
         }
-        else if(obj == null){
+        else if (obj == null) {
             res.render('error');
         }
         else {
             console.log(obj.createTime);
-            res.render('game', {title: 'Express', level: obj.levelTable, createTime : obj.createTime});
+            res.render('game', {title: 'Express', level: obj.levelTable, createTime: obj.createTime});
         }
     });
 };
 
 //send command to result page
-module.exports.gameResult = function(req, res){
+module.exports.gameResult = function (req, res) {
 
     var sample_arr = req.body.test_array;
     var createTime = req.body.createTime;
 
-    Level.findOne({createTime:createTime }, function (err, obj) {
+    Level.findOne({createTime: createTime}, function (err, obj) {
         if (err) {
             console.log('디비에러');
             res.render('error');
         }
-        else if(obj == null){
+        else if (obj == null) {
             res.render('error');
         }
         else {
             console.log(obj.levelTable);
-            res.render('result', {arr: sample_arr, levelTable:obj.levelTable});
+            res.render('result', {arr: sample_arr, levelTable: obj.levelTable});
         }
     });
-
 };
 
+module.exports.getLevelList = function (req, res) {
+    var user;
+    if (!req.session && req.session.user.user) {
+        user = req.session.user.user;
+    } else if (req.query.user) {
+        user = req.query.user;
+    } else {
+        user = "";
+    }
 
-module.exports.getLevelList = function(req, res){
     var level = new Level();
-    Level.find({}, function(err, obj){
+    Level.find({}, function (err, obj) {
         if (err) {
             console.log('err : ' + err);
-            res.render('error', {message : err});
-        } else if(obj.length==0){
-            res.render('index', {levelList : []});
+            res.render('error', {message: err});
+        } else if (obj.length == 0) {
+            res.render('index', {levelList: [], user: user});
         }
         else {
-            res.render('index', { levelList: obj});
+            res.render('index', {levelList: obj, user: user});
         }
     });
 };
