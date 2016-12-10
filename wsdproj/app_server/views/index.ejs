@@ -36,10 +36,17 @@
             var form = document.getElementById('_form');
             var tr = event.target;
             var target = tr.parentNode.childNodes[7];
-            var levelId = target.innerText;
+            var createTime = target.innerText;
+            var el;
 
-            console.log(levelId);
-            form.setAttribute('action', '/game?levelId=' + levelId);
+            console.log("create Time is : " + createTime);
+
+            el = document.createElement("input");
+            el.type = "hidden";
+            el.name = "createTime";
+            el.value = createTime;
+            form.appendChild(el);
+            form.setAttribute('action', '/game/start');
             form.submit();
         }
     </script>
@@ -84,47 +91,32 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" id="levelDesignMain">
     <table class="table">
         <thead class="thead-inverse">
         <tr>
             <th>NO</th>
             <th>Level Name</th>
             <th>Level Designer</th>
-            <th style="display:none"></th>
+            <th></th>
         </tr>
         </thead>
 
         <tbody>
+        <% for(var i = 0; i < levelList.length; i++){ %>
         <tr onclick="getLevel(event);">
-            <th scope="row">1</th>
-            <td class="td_first">11</td>
-            <td>lv name</td>
-            <td> designer</td>
+            <th scope="row"> <%= i + 1 %></th>
+            <td class="td_first">
+                <%= levelList[i].levelName %>
+            </td>
+            <td class="td_third">
+                <%= levelList[i].levelDesigner %>
+            </td>
+            <td>
+                <%= levelList[i].createTime %>
+            </td>
         </tr>
-        </tbody>
-    </table>
-    <form method="get" id="_form">
-    </form>
-</div>
-
-<div class="main area" id="levelDesignMain">
-    <table>
-        <thead>
-        <tr>
-            <th class="td_first">No</th>
-            <th>Level Name</th>
-            <th>Level Designer</th>
-            <th style="display:none"></th>
-        </tr>
-        </thead>
-        <tbody> 
-        <tr onclick="getLevel(event);"> 
-            <td>1</td>
-            <td><%= levelList[0].levelName %></td>
-            <td><%= levelList[0].levelDesigner %></td>
-            <td style="display:none"><%= levelList[0].createTime %></td>
-        </tr>
+        <% } %>
         </tbody>
     </table>
     <form method="get" id="_form">
