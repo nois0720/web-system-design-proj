@@ -9,9 +9,10 @@ var mongoose = require('mongoose');
 var Level = require('../models/level');
 
 module.exports.startGame = function (req, res) {
-    console.log('넘어온 id'+req.body.createTime);
 
     var createTime = req.body.createTime;
+    console.log(createTime);
+
     var level = new Level();
 
     Level.findOne({createTime:createTime }, function (err, obj) {

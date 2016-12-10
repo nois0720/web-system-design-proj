@@ -135,6 +135,10 @@ function createLevel(){
         el.value = level_arr[i];
         formElement.appendChild(el);
     }
+    console.log(level_arr);
+    
     formElement.submit();
-    return false;
 }
+
+
+
