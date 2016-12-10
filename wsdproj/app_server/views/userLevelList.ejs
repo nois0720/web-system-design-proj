@@ -1,0 +1,70 @@
+<!-- 특정 유저로 로그인 상태에서 그 유저의 레벨 리스트를 불러옴-->
+<html>
+<head>
+    <title>CSS Layout demo</title>
+    <meta charset="utf-8">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <style>
+        .indexLevelList:hover{
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        function getLevel(event){
+            var form = document.getElementById('_form');
+            var tr = event.target;
+            var target = tr.parentNode.childNodes[7];
+            var createTime = target.innerText;
+
+            var el;
+            el = document.createElement("input");
+            el.type = "hidden";
+            el.name = "createTime";
+            el.value = createTime;
+            form.appendChild(el);
+            form.setAttribute('action','/modifyGame/userLevel');
+            form.submit();
+
+        }
+    </script>
+</head>
+
+<body>
+<div class="area" id="header">
+    <div class="scaffold">Header</div>
+</div>
+<div class="main area" id="sidebar1">
+    Side Menu
+</div>
+</div>
+
+<div class="main area" id="levelDesignMain">
+
+    <table>
+        <thead>
+        <tr>
+            <th class="td_first">No</th>
+            <th>Level Name</th>
+            <th class="td_third">Level Designer</th>
+            <th style="display:none"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i = 0;i < levelList.length;i++){ %>
+        <tr class='indexLevelList' onclick="getLevel(event);">
+            <td class="td_first"><%=i+1%></td>
+            <td><%=levelList[i].levelName%></td>
+            <td class="td_third"><%=levelList[i].levelDesigner%></td>
+            <td style="display:none"><%=levelList[i].createTime%></td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+    <form method="post" id="_form">
+    </form>
+</div>
+<div class="area" id="footer">
+    <div class="scaffold">Footer</div>
+</div>
+</body>
+</html>

@@ -38,7 +38,17 @@ var PC_angle = 0;
 var PC_dir = Dir.up;
 var isEnd = false;
 
+//read level information from result.ejs
+var levelTable = document.getElementsByClassName('levelTable');
+
+
 var parseLevel = function () {
+    for (var i = 0; i < 8; i++) {
+        for (var j = 0; j < 8; j++) {
+            level[i][j] = levelTable[i * 8 + j].innerHTML;
+        }
+    }
+
     for (var i = 0; i < 8; i++) {
         for (var j = 0; j < 8; j++) {
             if (level[i][j] == 1) {

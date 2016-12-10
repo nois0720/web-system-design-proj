@@ -17,6 +17,7 @@
     <div class="sidebar-top">
         <img class="origin" id="obstacle" src="/images/obstacle.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
         <img class="origin" id="PC" src="/images/PC.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
+        <img class="origin" id="flag" src="/images/flag.png" draggable="true" ondragstart="dragStart(event)" width="32" height="32">
     </div>
     <div class="sidebar-bottom">
         <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
@@ -29,20 +30,74 @@
      ondragover="allowDrop(event)" areastate="clear">
     <% for(var i=0;i<8;i++) {%>
         <%for(var j=0;j<8;j++) {%>
-                <div id=cell<%=i+j%> class="levelDesignCell" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+                <div id=cell<%=i*8+j%> class="levelDesignCell" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
                  ondragover="allowDrop(event)" areastate="clear"></div>
         <%}%>
     <div class="dummy"></div>
     <%}%>
     <br><br>
-    <form action="/modifyGame/updateLevel" method="post" onsubmit="">
-        Level Name : <input type="text" name="levelName" placeholder="1-2"><br>
-        Designer   : <input type="text" name="levelDesigner" placeholder="NDY"><br>
-        <input type="hidden" name="createDate" id="create_date">
+
+    <form action="/modifyGame/updateLevel" method="post" onsubmit="createLevel()">
+        Level Name : <input type="text" name="levelName" placeholder="<%=level.levelName%>"><br>
+        Designer   : <input type="text" name="levelDesigner" placeholder="<%=level.levelDesigner%>"><br>
+        <input type="hidden" name="createTime" id="create_time" value="<%=level.createTime%>">
         <input type="submit" value="modify">
-        <input type="button" value="delete" onclick="">
+    </form>
+    <form id="deleteForm" action="/modifyGame/deleteLevel" method="post" onsubmit="deleteLevel()">
+        <input type="hidden" name="createTime" value="<%=level.createTime%>">
+        <input type="submit" value="delete">
+    </form>
 
 </div>
+<script>
+    var levelTable = new Array();
+    <%for(var i=0;i<64;i++) {%>
+    levelTable[<%=i%>] =  <%= level.levelTable[i] %>;
+    <%}%>
+    for(var i=0;i<64;i++){
+        var targetCell = document.getElementById('cell'+i);
+        if(levelTable[i]=='1'){
+
+            var img = document.createElement('img');
+            img.setAttribute('class', 'copy');
+            img.setAttribute('id', 'PC');
+            img.setAttribute('src', '/images/PC.png');
+            img.setAttribute('draggable', 'true');
+            img.setAttribute('ondragstart', 'dragStart(event)');
+            img.setAttribute('width', '32');
+            img.setAttribute('height', '32');
+
+            targetCell.appendChild(img);
+
+        }else if(levelTable[i]=='2'){
+
+            var img = document.createElement('img');
+            img.setAttribute('class', 'copy');
+            img.setAttribute('id', 'obstacle');
+            img.setAttribute('src', '/images/obstacle.png');
+            img.setAttribute('draggable', 'true');
+            img.setAttribute('ondragstart', 'dragStart(event)');
+            img.setAttribute('width', '32');
+            img.setAttribute('height', '32');
+            targetCell.appendChild(img);
+
+        }else if(levelTable[i]=='3'){
+
+            var img = document.createElement('img');
+            img.setAttribute('class', 'copy');
+            img.setAttribute('id', 'flag');
+            img.setAttribute('src', '/images/flag.png');
+            img.setAttribute('draggable', 'true');
+            img.setAttribute('ondragstart', 'dragStart(event)');
+            img.setAttribute('width', '32');
+            img.setAttribute('height', '32');
+            targetCell.appendChild(img);
+
+        }else{
+            continue;
+        }
+    }
+</script>
 <div class="area" id="footer">
     <div class="scaffold">Footer</div>
 </div>

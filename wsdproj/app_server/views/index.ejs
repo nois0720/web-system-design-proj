@@ -91,37 +91,58 @@
     </div>
 </div>
 
-<div class="container" id="levelDesignMain">
-    <table class="table">
-        <thead class="thead-inverse">
-        <tr>
-            <th>NO</th>
-            <th>Level Name</th>
-            <th>Level Designer</th>
-            <th></th>
-        </tr>
-        </thead>
+<table class="table container" id="levelDesignMain">
+    <thead class="thead-inverse">
+    <tr>
+        <th>NO</th>
+        <th>Level Name</th>
+        <th>Level Designer</th>
+    </tr>
+    </thead>
 
-        <tbody>
-        <% for(var i = 0; i < levelList.length; i++){ %>
-        <tr onclick="getLevel(event);">
-            <th scope="row"> <%= i + 1 %></th>
-            <td class="td_first">
-                <%= levelList[i].levelName %>
-            </td>
-            <td class="td_third">
-                <%= levelList[i].levelDesigner %>
-            </td>
-            <td>
-                <%= levelList[i].createTime %>
-            </td>
-        </tr>
-        <% } %>
-        </tbody>
-    </table>
-    <form method="post" id="_form">
-    </form>
-</div>
+    <tbody>
+    <% for(var i = 0; i < levelList.length; i++){ %>
+    <tr onclick="getLevel(event);">
+        <td scope="row"> <%= i + 1 %></td>
+        <td class="td_first"><%= levelList[i].levelName %></td>
+        <td class="td_third"><%= levelList[i].levelDesigner %></td>
+        <td style="display:none"><%= levelList[i].createTime %></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>
+<form method="post" id="_form"></form>
+
+<table class="table">
+    <thead class="thead-default">
+    <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    </tbody>
+</table>
 
 <script src="/bootstrap-2.3.2/docs/assets/js/jquery.js"></script>
 <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-transition.js"></script>
