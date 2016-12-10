@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 
-var AM = require('./../modules/account-manager');
+var AM = require('./../account-modules/account-manager');
 
 router.get('/', function(req, res){
     // check if the user's credentials are saved in a cookie //
