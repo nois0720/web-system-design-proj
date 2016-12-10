@@ -52,13 +52,15 @@ module.exports.gameResult = function (req, res) {
 
 module.exports.getLevelList = function (req, res) {
     var user;
-    if (!req.session && req.session.user.user) {
+    if (req.session && req.session.user.user) {
         user = req.session.user.user;
     } else if (req.query.user) {
         user = req.query.user;
     } else {
         user = "";
     }
+
+    console.log("user : "+user);
 
     var level = new Level();
     Level.find({}, function (err, obj) {
