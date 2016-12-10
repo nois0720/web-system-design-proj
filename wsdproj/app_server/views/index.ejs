@@ -48,7 +48,6 @@
         </tr>
         </thead>
         <tbody>
-        <%if (levelList!= null)%>
         <% for(var i = 0;i < levelList.length;i++){ %>
         <tr class='indexLevelList' onclick="getLevel(event);">
             <td class="td_first"><%=i+1%></td>
@@ -57,6 +56,7 @@
             <td style="display:none"><%=levelList[i].createTime%></td>
         </tr>
         <% } %>
+
         </tbody>
     </table>
     <form method="post" id="_form">
