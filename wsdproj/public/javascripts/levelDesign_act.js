@@ -105,7 +105,7 @@ function createImg(id) {
 }
 
 function createLevel(){
-    var formElement = document.getElementsByTagName('form')[0];
+    var formElement = document.getElementById('_form');
     var level_arr = [0];
     var cellArea = document.getElementById('levelDesignMain');
 
@@ -124,10 +124,7 @@ function createLevel(){
             k++;
     }
 
-    //console.log(level_arr.length);
-    //for(var i=0;i<64;i++){
-    //    console.log(level_arr[i]);
-    //}//
+
 
     var el;
     for (var i = 0; i < level_arr.length; i++) {
@@ -137,7 +134,7 @@ function createLevel(){
         el.value = level_arr[i];
         formElement.appendChild(el);
     }
-    
+
     formElement.submit();
 }
 

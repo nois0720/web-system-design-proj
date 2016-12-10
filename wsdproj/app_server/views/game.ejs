@@ -31,6 +31,20 @@
             text-align: center;
             align-content: center;
         }
+
+        .main {
+            Height: 70%;
+        }
+
+        .sidebar-top {
+            Height: 80%;
+            border: 1px solid black;
+        }
+        #levelDesignMain{
+            width:auto;
+            float:left;
+        }
+
     </style>
     <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
@@ -47,32 +61,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="http://getbootstrap.com/2.3.2/examples/hero.html#">Aigo</a>
+            <a class="brand" href="/">Aigo</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="/bootstrap">Home</a></li>
                     <li><a href="/bootstrap">About</a></li>
                     <li><a href="/bootstrap">Contact</a></li>
                     <li class="dropdown">
                         <a href="http://getbootstrap.com/2.3.2/examples/hero.html#" class="dropdown-toggle"
-                           data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                           data-toggle="dropdown">Menu <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="http://getbootstrap.com/2.3.2/examples/hero.html#">Action</a></li>
-                            <li><a href="http://getbootstrap.com/2.3.2/examples/hero.html#">Another action</a></li>
-                            <li><a href="http://getbootstrap.com/2.3.2/examples/hero.html#">Something else here</a></li>
                             <li class="divider"></li>
-                            <li class="nav-header">Nav header</li>
-                            <li><a href="http://getbootstrap.com/2.3.2/examples/hero.html#">Separated link</a></li>
-                            <li><a href="http://getbootstrap.com/2.3.2/examples/hero.html#">One more separated link</a>
-                            </li>
+                            <li class="nav-header">My Menu</li>
+                            <li><a href="/makeGame">Create Game</a></li>
+                            <li><a href="/modifyGame">Modify Game</a></li>
+                            <li><a href="/">Modify Info</a></li>
+
                         </ul>
                     </li>
                 </ul>
                 <form class="navbar-form pull-right" method="get" action="/">
-                    <input class="span2" type="text" placeholder="ID">
-                    <input class="span2" type="password" placeholder="Password">
                     <button type="submit" class="btn btn-lg">Sign in</button>
-                    <button type="submit" class="btn btn-lg btn-success">Sign up</button>
+                    <button type="submit" class="btn btn-lg btn-success">Logout</button>
                 </form>
             </div><!--/.nav-collapse -->
         </div>

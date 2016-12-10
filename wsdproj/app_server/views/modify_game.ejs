@@ -37,7 +37,7 @@
     <%}%>
     <br><br>
 
-    <form action="/modifyGame/updateLevel" method="post" onsubmit="createLevel()">
+    <form id="_form" action="/modifyGame/updateLevel" method="post" onsubmit="createLevel()">
         Level Name : <input type="text" name="levelName" placeholder="<%=level.levelName%>"><br>
         Designer   : <%=level.levelDesigner%>  <br>
         <input type="hidden" name="createTime" id="create_time" value="<%=level.createTime%>">
@@ -54,6 +54,7 @@
     <%for(var i=0;i<64;i++) {%>
     levelTable[<%=i%>] =  <%= level.levelTable[i] %>;
     <%}%>
+
     for(var i=0;i<64;i++){
         var targetCell = document.getElementById('cell'+i);
         if(levelTable[i]=='1'){
