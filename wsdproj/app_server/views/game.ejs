@@ -22,7 +22,7 @@
             height: 420px;
             float: left
         }
-        
+
         .span4 {
             text-align: center;
             align-content: center;
@@ -37,9 +37,9 @@
             border: 1px solid black;
         }
 
-        #levelDesignMain{
-            width:auto;
-            float:left;
+        #levelDesignMain {
+            width: auto;
+            float: left;
         }
 
         .droptarget {
@@ -64,17 +64,17 @@
             <a class="brand" href="/">Aigo</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <% if(user !== "") { %>
                     <li><a href="/about">About</a></li>
                     <li><a href="/about">Contact</a></li>
+                    <% if(user !== "") { %>
                     <li class="dropdown">
                         <a href="http://getbootstrap.com/2.3.2/examples/hero.html#" class="dropdown-toggle"
                            data-toggle="dropdown">Menu <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li class="divider"></li>
                             <li class="nav-header">My Menu</li>
-                            <li><a href="/makeGame?user=<%=user%>">Create Game</a></li>
-                            <li><a href="/modifyGame?user=<%=user%>">Modify Game</a></li>
+                            <li><a href="/makeGame?user=<%= user %>">Create Game</a></li>
+                            <li><a href="/modifyGame?user=<%= user %>">Modify Game</a></li>
                             <li><a href="/">Modify Info</a></li>
                         </ul>
                     </li>

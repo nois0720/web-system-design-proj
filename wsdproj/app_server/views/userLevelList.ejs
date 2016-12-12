@@ -12,16 +12,14 @@
             padding-top: 60px;
             padding-bottom: 40px;
         }
-        .indexLevelList:hover{
+
+        .indexLevelList:hover {
             background-color: #c09853;
         }
     </style>
-
-
     <!-- Fav and touch icons -->
-
     <script>
-        function getLevel(event){
+        function getLevel(event) {
             var form = document.getElementById('_form');
             var tr = event.target;
             var target = tr.parentNode.childNodes[7];
@@ -33,7 +31,7 @@
             el.name = "createTime";
             el.value = createTime;
             form.appendChild(el);
-            form.setAttribute('action','/modifyGame/userLevel');
+            form.setAttribute('action', '/modifyGame/userLevel');
             form.submit();
         }
     </script>
@@ -63,8 +61,8 @@
                         <ul class="dropdown-menu">
                             <li class="divider"></li>
                             <li class="nav-header">My Menu</li>
-                            <li><a href="/makeGame?user=<%=user%>">Create Game</a></li>
-                            <li><a href="/modifyGame?user=<%=user%>">Modify Game</a></li>
+                            <li><a href="/makeGame?user=<%= user %>">Create Game</a></li>
+                            <li><a href="/modifyGame?user=<%= user %>">Modify Game</a></li>
                             <li><a href="/">Modify Info</a></li>
                         </ul>
                     </li>
@@ -100,10 +98,10 @@
             <tbody>
             <% for(var i = 0;i < levelList.length;i++){ %>
             <tr class='indexLevelList' onclick="getLevel(event);">
-                <td class="td_first"><%=i+1%></td>
-                <td><%=levelList[i].levelName%></td>
-                <td class="td_third"><%=levelList[i].levelDesigner%></td>
-                <td style="display:none"><%=levelList[i].createTime%></td>
+                <td class="td_first"><%= i+1 %></td>
+                <td><%= levelList[i].levelName %></td>
+                <td class="td_third"><%= levelList[i].levelDesigner %></td>
+                <td style="display:none"><%= levelList[i].createTime %></td>
             </tr>
             <% } %>
             </tbody>

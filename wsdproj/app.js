@@ -1,12 +1,3 @@
-// app.locals.pretty = true;
-// app.set('port', process.env.PORT || 3000);
-
-// var dbHost = process.env.DB_HOST || 'localhost'
-// var dbPort = process.env.DB_PORT || 27017;
-// var dbName = process.env.DB_NAME || 'node-login';
-
-// var dbURL = 'mongodb://'+dbHost+':'+dbPort+'/'+dbName;
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -32,7 +23,6 @@ var app = express();
 var db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function () {
-    // CONNECTED TO MONGODB SERVER
     console.log("Connected to mongod server");
 });
 

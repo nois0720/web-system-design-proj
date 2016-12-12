@@ -1,14 +1,3 @@
-/**
- * Created by Nois on 2016. 12. 2..
- */
-
-var gameObjectID = {
-    none: 0,
-    pc: 1,
-    obstacle: 2,
-    goal: 3
-}
-
 var level = [
     [0, 0, 2, 2, 0, 0, 0, 0],
     [0, 1, 0, 2, 0, 0, 0, 0],
@@ -45,11 +34,11 @@ var obstaclePosArr = new Array(); //obstacle position
 var levelTable = document.getElementsByClassName('levelTable');
 
 var parseLevel = function () {
-     for (var i = 0; i < 8; i++) {
-         for (var j = 0; j < 8; j++) {
-             level[i][j] = levelTable[i * 8 + j].innerHTML;
-         }
-     }
+    for (var i = 0; i < 8; i++) {
+        for (var j = 0; j < 8; j++) {
+            level[i][j] = levelTable[i * 8 + j].innerHTML;
+        }
+    }
 
     for (var i = 0; i < 8; i++) {
         for (var j = 0; j < 8; j++) {

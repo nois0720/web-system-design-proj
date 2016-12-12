@@ -116,119 +116,123 @@
             <h2>Object</h2>
             <div class="main" id="_contents">
                 <div class="sidebar-top">
-                <img class="origin" id="obstacle" src="/images/obstacle.png" draggable="true" ondragstart="dragStart(event)" width="48" height="48">
-                <img class="origin" id="PC" src="/images/PC.png" draggable="true" ondragstart="dragStart(event)" width="48" height="48">
-                <img class="origin" id="flag" src="/images/flag.png" draggable="true" ondragstart="dragStart(event)" width="48" height="48">
+                    <img class="origin" id="obstacle" src="/images/obstacle.png" draggable="true"
+                         ondragstart="dragStart(event)" width="48" height="48">
+                    <img class="origin" id="PC" src="/images/PC.png" draggable="true" ondragstart="dragStart(event)"
+                         width="48" height="48">
+                    <img class="origin" id="flag" src="/images/flag.png" draggable="true" ondragstart="dragStart(event)"
+                         width="48" height="48">
+                </div>
+                <div class="sidebar-bottom">
+                    <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
+                         ondrop="dropDelete(event)"
+                         ondragover="allowDrop(event)" areastate="clear"><b>Delete Zone</b></div>
+                </div>
             </div>
-            <div class="sidebar-bottom">
-                <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="dropDelete(event)"
-                    ondragover="allowDrop(event)" areastate="clear"><b>Delete Zone</b></div>
-            </div>
-        </div>
 
-        <div class="span4">
-            <h2>Level View</h2>
-            <div class="main" id="levelDesignMain" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
-                 ondrop="dropDelete(event)"
-                 ondragover="allowDrop(event)" areastate="clear">
-                <% for(var i = 0;i < 8;i++) { %>
-                <% for(var j = 0;j < 8;j++) { %>
-                <div id=cell<%= i*8+j %> class="levelDesignCell" ondragenter="dragEnter(event)"
-                     ondragleave="dragLeave(event)" ondrop="drop(event)"
-                     ondragover="allowDrop(event)" areastate="clear"></div>
-                <% } %>
-                <div class="dummy"></div>
-                <% } %>
-                <br>
+            <div class="span4">
+                <h2>Level View</h2>
+                <div class="main" id="levelDesignMain" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
+                     ondrop="dropDelete(event)"
+                     ondragover="allowDrop(event)" areastate="clear">
+                    <% for(var i = 0;i < 8;i++) { %>
+                    <% for(var j = 0;j < 8;j++) { %>
+                    <div id=cell<%= i * 8 + j %> class="levelDesignCell" ondragenter="dragEnter(event)"
+                         ondragleave="dragLeave(event)" ondrop="drop(event)"
+                         ondragover="allowDrop(event)" areastate="clear"></div>
+                    <% } %>
+                    <div class="dummy"></div>
+                    <% } %>
+                    <br>
+                </div>
             </div>
-        </div>
-        <div class="span4">
-            <br><br><br><br>
-            <hr>
-            <form id="_form" action="/modifyGame/updateLevel" method="post" onsubmit="createLevel()">
-                Level Name : <input type="text" name="levelName" placeholder="<%= level.levelName %>"><br>
-                Designer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <%= level.levelDesigner %> <br>
-                <input type="hidden" name="createTime" id="create_time" value="<%= level.createTime %>">
-                <br><br>
-                <input class="btn btn-lg btn-success" type="submit" value="modify">
-            </form>
-            <form id="deleteForm" action="/modifyGame/deleteLevel" method="post" onsubmit="deleteLevel()">
-                <input type="hidden" name="createTime" value="<%= level.createTime %>">
-                <input class="btn btn-lg btn-danger" type="submit" value="delete">
-            </form>
-            <hr>
-        </div>
+            <div class="span4">
+                <br><br><br><br>
+                <hr>
+                <form id="_form" action="/modifyGame/updateLevel" method="post" onsubmit="createLevel()">
+                    Level Name : <input type="text" name="levelName" placeholder="<%= level.levelName %>"><br>
+                    Designer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <%= level.levelDesigner %> <br>
+                    <input type="hidden" name="createTime" id="create_time" value="<%= level.createTime %>">
+                    <br><br>
+                    <input class="btn btn-lg btn-success" type="submit" value="modify">
+                </form>
+                <form id="deleteForm" action="/modifyGame/deleteLevel" method="post" onsubmit="deleteLevel()">
+                    <input type="hidden" name="createTime" value="<%= level.createTime %>">
+                    <input class="btn btn-lg btn-danger" type="submit" value="delete">
+                </form>
+                <hr>
+            </div>
 
-        <footer>
-            <p>© Aigo 2016</p>
-        </footer>
+            <footer>
+                <p>© Aigo 2016</p>
+            </footer>
+        </div>
     </div>
-</div>
 
 
-<script>
-    var levelTable = new Array();
-    <% for(var i = 0;i < 64;i++) { %>
-    levelTable[<%= i %>] =  <%= level.levelTable[i] %>;
-    <% } %>
+    <script>
+        var levelTable = new Array();
+        <% for(var i = 0;i < 64;i++) { %>
+        levelTable[<%= i %>] =  <%= level.levelTable[i] %>;
+        <% } %>
 
-    for (var i = 0; i < 64; i++) {
-        var targetCell = document.getElementById('cell' + i);
-        if (levelTable[i] == '1') {
+        for (var i = 0; i < 64; i++) {
+            var targetCell = document.getElementById('cell' + i);
+            if (levelTable[i] == '1') {
 
-            var img = document.createElement('img');
-            img.setAttribute('class', 'copy');
-            img.setAttribute('id', 'PC');
-            img.setAttribute('src', '/images/PC.png');
-            img.setAttribute('draggable', 'true');
-            img.setAttribute('ondragstart', 'dragStart(event)');
-            img.setAttribute('width', '32');
-            img.setAttribute('height', '32');
+                var img = document.createElement('img');
+                img.setAttribute('class', 'copy');
+                img.setAttribute('id', 'PC');
+                img.setAttribute('src', '/images/PC.png');
+                img.setAttribute('draggable', 'true');
+                img.setAttribute('ondragstart', 'dragStart(event)');
+                img.setAttribute('width', '32');
+                img.setAttribute('height', '32');
 
-            targetCell.appendChild(img);
+                targetCell.appendChild(img);
 
-        } else if (levelTable[i] == '2') {
+            } else if (levelTable[i] == '2') {
 
-            var img = document.createElement('img');
-            img.setAttribute('class', 'copy');
-            img.setAttribute('id', 'obstacle');
-            img.setAttribute('src', '/images/obstacle.png');
-            img.setAttribute('draggable', 'true');
-            img.setAttribute('ondragstart', 'dragStart(event)');
-            img.setAttribute('width', '32');
-            img.setAttribute('height', '32');
-            targetCell.appendChild(img);
+                var img = document.createElement('img');
+                img.setAttribute('class', 'copy');
+                img.setAttribute('id', 'obstacle');
+                img.setAttribute('src', '/images/obstacle.png');
+                img.setAttribute('draggable', 'true');
+                img.setAttribute('ondragstart', 'dragStart(event)');
+                img.setAttribute('width', '32');
+                img.setAttribute('height', '32');
+                targetCell.appendChild(img);
 
-        } else if (levelTable[i] == '3') {
+            } else if (levelTable[i] == '3') {
 
-            var img = document.createElement('img');
-            img.setAttribute('class', 'copy');
-            img.setAttribute('id', 'flag');
-            img.setAttribute('src', '/images/flag.png');
-            img.setAttribute('draggable', 'true');
-            img.setAttribute('ondragstart', 'dragStart(event)');
-            img.setAttribute('width', '32');
-            img.setAttribute('height', '32');
-            targetCell.appendChild(img);
+                var img = document.createElement('img');
+                img.setAttribute('class', 'copy');
+                img.setAttribute('id', 'flag');
+                img.setAttribute('src', '/images/flag.png');
+                img.setAttribute('draggable', 'true');
+                img.setAttribute('ondragstart', 'dragStart(event)');
+                img.setAttribute('width', '32');
+                img.setAttribute('height', '32');
+                targetCell.appendChild(img);
 
-        } else {
-            continue;
+            } else {
+                continue;
+            }
         }
-    }
-</script>
-<script src="/bootstrap-2.3.2/docs/assets/js/jquery.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-transition.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-alert.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-modal.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-dropdown.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-scrollspy.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tab.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tooltip.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-popover.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-button.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-collapse.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-carousel.js"></script>
-<script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-typeahead.js"></script>
+    </script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/jquery.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-transition.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-alert.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-modal.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-dropdown.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tab.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-tooltip.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-popover.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-button.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-collapse.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-carousel.js"></script>
+    <script src="/bootstrap-2.3.2/docs/assets/js/bootstrap-typeahead.js"></script>
 
 </body>
 </html>

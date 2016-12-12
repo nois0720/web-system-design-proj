@@ -1,6 +1,3 @@
-/**
- * Created by Nois on 2016. 12. 2..
- */
 var cmdCode = {
     move: '1',
     turnLeft: '2',
@@ -34,14 +31,13 @@ var PC_posX_cell;
 var PC_posY_cell;
 var PC_posX = 0;
 var PC_posY = 0;
-var obstaclePosArr = new Array(); //obstacle position
+var obstaclePosArr = new Array();
 var PC_angle = 0;
 var PC_dir = Dir.up;
 var isEnd = false;
 var successAndEnd = false;
 var failAndEnd = false;
 
-//read level information from result.ejs
 var levelTable = document.getElementsByClassName('levelTable');
 var createTime = document.getElementById('create_time').value;
 
@@ -118,7 +114,6 @@ function stopCmdProcess(index) {
     clearInterval(intervalList[index]);
 
 
-
     if (commandList[index].innerHTML == cmdCode.move) {
         errorContorl();
 
@@ -139,10 +134,10 @@ function stopCmdProcess(index) {
     }
     draw();
 
-    if(index == commandList.length-1 && !successAndEnd && !failAndEnd){
+    if (index == commandList.length - 1 && !successAndEnd && !failAndEnd) {
 
         alert('fail');
-        window.location.href='/game/start?createTime='+createTime;
+        window.location.href = '/game/start?createTime=' + createTime;
     }
 
 }
@@ -225,24 +220,22 @@ function errorContorl() {
 
 function checkIsValidCell() {
 
-    if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0  && !failAndEnd) {
+    if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0 && !failAndEnd) {
         isEnd = true;
         failAndEnd = true;
         alert('fail!!!');
-        //window.location.href ="/";
-         window.location.href = '/game/start?createTime='+createTime;
+        window.location.href = '/game/start?createTime=' + createTime;
     }
     if (level[PC_posY_cell][PC_posX_cell] == 2 && failAndEnd) {
         isEnd = true;
         failAndEnd = true;
         alert("fail!!!");
-        //window.location.href ="/";
-        window.location.href = '/game/start?createTime='+createTime;
+        window.location.href = '/game/start?createTime=' + createTime;
     } else if (level[PC_posY_cell][PC_posX_cell] == 3) {
         isEnd = true;
         successAndEnd = true;
         alert("Success");
-        window.location.href='/game/start?createTime='+createTime;
+        window.location.href = '/game/start?createTime=' + createTime;
     }
 
 }

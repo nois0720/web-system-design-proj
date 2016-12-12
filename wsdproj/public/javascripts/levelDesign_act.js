@@ -1,6 +1,3 @@
-/**
- * Created by Nois on 2016. 12. 2..
- */
 var States = {"origin": 0, "copy": 1};
 var dropAreaStates = {"clear": "clear", "full": "full"};
 
@@ -104,24 +101,24 @@ function createImg(id) {
     return img;
 }
 
-function createLevel(){
+function createLevel() {
     var formElement = document.getElementById('_form');
     var level_arr = [0];
     var cellArea = document.getElementById('levelDesignMain');
 
-    var k=0;
-    for(var i=0;i<143;i++){
-        if(i%2==0 || i==17 || i== 35 || i== 53 || i== 71 || i==89 || i==107 || i==125) continue;
-            if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'PC') {
-                level_arr[k] = 1;
-            } else if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'obstacle') {
-                level_arr[k] = 2;
-            } else if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'flag') {
-                level_arr[k] = 3;
-            } else {
-                level_arr[k] = 0;
-            }
-            k++;
+    var k = 0;
+    for (var i = 0; i < 143; i++) {
+        if (i % 2 == 0 || i == 17 || i == 35 || i == 53 || i == 71 || i == 89 || i == 107 || i == 125) continue;
+        if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'PC') {
+            level_arr[k] = 1;
+        } else if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'obstacle') {
+            level_arr[k] = 2;
+        } else if (cellArea.childNodes[i].childNodes[0] && cellArea.childNodes[i].childNodes[0].getAttribute('id') == 'flag') {
+            level_arr[k] = 3;
+        } else {
+            level_arr[k] = 0;
+        }
+        k++;
     }
 
 

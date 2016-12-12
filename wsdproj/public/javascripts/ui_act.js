@@ -1,6 +1,3 @@
-/**
- * Created by Nois on 2016. 12. 2..
- */
 var States = {"origin": 0, "copy": 1};
 var dropAreaStates = {"clear": "clear", "full": "full"};
 
@@ -32,16 +29,16 @@ function drop(ev) {
             changeImg(ev);
         }
     }
-    //dynamic add
+
     var dropTargetList = document.getElementsByClassName('droptarget');
     var imgBlockCount = 0;
-    for(var i=0;i<dropTargetList.length;i++){
-        if(dropTargetList[i].hasChildNodes() ){
+    for (var i = 0; i < dropTargetList.length; i++) {
+        if (dropTargetList[i].hasChildNodes()) {
             imgBlockCount++;
         }
     }
 
-    if(imgBlockCount > dropTargetList.length-3){
+    if (imgBlockCount > dropTargetList.length - 3) {
 
         var newDiv = document.createElement('div');
         newDiv.setAttribute('class', 'droptarget');
@@ -136,10 +133,10 @@ function getAnswer() {
                 al_no.push(1);
             } else if (answerDiv[i].childNodes[0].getAttribute('id') == 'rotate') {
                 al_no.push(2);
-            } else if (answerDiv[i].childNodes[0].getAttribute('id')=='rotate2'){
+            } else if (answerDiv[i].childNodes[0].getAttribute('id') == 'rotate2') {
                 al_no.push(3);
             }
-            } else {
+        } else {
             continue;
         }
     }
@@ -152,7 +149,7 @@ function getAnswer() {
         el.value = al_no[i];
         formElement.appendChild(el);
     }
-    formElement.setAttribute('action','/game');
+    formElement.setAttribute('action', '/game');
     formElement.submit();
     return false;
 }

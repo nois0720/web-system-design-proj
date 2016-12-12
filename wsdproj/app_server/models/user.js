@@ -1,12 +1,9 @@
-/**
- * Created by Nois on 2016. 12. 8..
- */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    id : String,
-    passwd : String,
+    id: String,
+    passwd: String,
     published_date: {type: Date, default: Date.now}
 });
 

@@ -36,9 +36,10 @@
             Height: 80%;
             border: 1px solid black;
         }
-        #levelDesignMain{
-            width:auto;
-            float:left;
+
+        #levelDesignMain {
+            width: auto;
+            float: left;
         }
 
         .droptarget {
@@ -72,8 +73,8 @@
                         <ul class="dropdown-menu">
                             <li class="divider"></li>
                             <li class="nav-header">My Menu</li>
-                            <li><a href="/makeGame?user=<%=user%>">Create Game</a></li>
-                            <li><a href="/modifyGame?user=<%=user%>">Modify Game</a></li>
+                            <li><a href="/makeGame?user=<%= user %>">Create Game</a></li>
+                            <li><a href="/modifyGame?user=<%= user %>">Modify Game</a></li>
                             <li><a href="/">Modify Info</a></li>
                         </ul>
                     </li>
@@ -101,10 +102,12 @@
         <div class="span4 main" id="ui-bar">
             <h2>UI</h2>
             <div class="sidebar-top">
-                <img class="origin" id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)" width="64"
+                <img class="origin" id="arrow" src="/images/arrow.png" draggable="true" ondragstart="dragStart(event)"
+                     width="64"
                      height="64">
                 </br>
-                <img class="origin" id="rotate" src="/images/rotate.png" draggable="true" ondragstart="dragStart(event)" width="64"
+                <img class="origin" id="rotate" src="/images/rotate.png" draggable="true" ondragstart="dragStart(event)"
+                     width="64"
                      height="64">
                 </br>
                 </br>
@@ -122,7 +125,8 @@
             <h2>Sequence</h2>
             <div class="main area" id="sidebar2">
                 <% for(var i = 0;i < 10;i++){ %>
-                <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)"
+                <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
+                     ondrop="drop(event)"
                      ondragover="allowDrop(event)" areastate="clear"></div>
                 <% } %>
             </div>
@@ -144,7 +148,7 @@
 
     <footer>
         <p>© Aigo 2016</p>
-        <input type="hidden" id="create_time" name="createTime" value="<%=createTime%>">
+        <input type="hidden" id="create_time" name="createTime" value="<%= createTime %>">
     </footer>
 </div>
 

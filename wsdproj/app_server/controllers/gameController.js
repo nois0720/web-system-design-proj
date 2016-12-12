@@ -6,7 +6,7 @@ module.exports.startGame = function (req, res) {
     var createTime = req.body.createTime;
     var createTime2 = req.query.createTime;
 
-    Level.findOne({createTime: (createTime==null || createTime=="") ? createTime2:createTime}, function (err, obj) {
+    Level.findOne({createTime: (createTime == null || createTime == "") ? createTime2 : createTime}, function (err, obj) {
         if (err) {
             console.log(err);
             res.render('error', {message: err});
@@ -34,7 +34,7 @@ module.exports.gameResult = function (req, res) {
             res.render('error');
         }
         else {
-            res.render('result', {arr: sample_arr, levelTable: obj.levelTable, user: user, createTime:createTime});
+            res.render('result', {arr: sample_arr, levelTable: obj.levelTable, user: user, createTime: createTime});
         }
     });
 };
