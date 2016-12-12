@@ -125,7 +125,6 @@ function createLevel(){
     }
 
 
-
     var el;
     for (var i = 0; i < level_arr.length; i++) {
         el = document.createElement("input");

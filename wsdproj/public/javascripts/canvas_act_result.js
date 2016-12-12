@@ -40,7 +40,8 @@ var isEnd = false;
 
 //read level information from result.ejs
 var levelTable = document.getElementsByClassName('levelTable');
-
+var createTime = document.getElementById('create_time');
+console.log(createTime.innerHTML);
 
 var parseLevel = function () {
     for (var i = 0; i < 8; i++) {
@@ -74,6 +75,7 @@ var intervalList = [];
 
 var commandList = document.getElementsByClassName('commandList');
 
+
 function startLogic() {
     for (var i = 0, max = commandList.length; i < max; i++) {
         (function (cmdIndex) {
@@ -101,7 +103,7 @@ function startCmdProcess(index) {
         intervalId = setInterval(move, (1000 / 30));
     } else if (commandList[index].innerHTML == '2') {
         intervalId = setInterval(rotate, (1000 / 90));
-    } 
+    }
 
     intervalList.push(intervalId);
 }
@@ -198,10 +200,14 @@ function checkIsValidCell() {
     if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0) {
         isEnd = true;
         alert('fail!!!');
+        window.location.href ="/";
+        // window.location.href = '/game/start?createTime='+createTime;
     }
     if (level[PC_posY_cell][PC_posX_cell] == 2) {
         isEnd = true;
         alert("Fail!!!");
+        window.location.href ="/";
+        // window.location.href = '/game/start?createTime='+createTime;
     } else if (level[PC_posY_cell][PC_posX_cell] == 3) {
         isEnd = true;
         alert("Success");
