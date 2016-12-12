@@ -3,7 +3,8 @@
  */
 var cmdCode = {
     move: '1',
-    turnLeft: '2'
+    turnLeft: '2',
+    turnRight: '3'
 }
 
 var level = [
@@ -100,7 +101,9 @@ function startCmdProcess(index) {
     if (commandList[index].innerHTML == '1') {
         intervalId = setInterval(move, (1000 / 30));
     } else if (commandList[index].innerHTML == '2') {
-        intervalId = setInterval(rotate, (1000 / 90));
+        intervalId = setInterval(rotateLeft, (1000 / 90));
+    } else if (commandList[index].innerHTML == '3') {
+        intervalId = setInterval(rotateRight, (1000 / 90));
     }
 
     intervalList.push(intervalId);
@@ -122,6 +125,8 @@ function stopCmdProcess(index) {
         }
         checkIsValidCell();
     } else if (commandList[index].innerHTML == cmdCode.turnLeft) {
+        PC_dir = (PC_dir + (4 - 1)) % 4;
+    } else if (commandList[index].innerHTML == cmdCode.turnRight) {
         PC_dir = (PC_dir + 1) % 4;
     }
 }
@@ -135,11 +140,21 @@ function move() {
     draw();
 }
 
-function rotate() {
+function rotateRight() {
     PC_angle++;
     PC_angle %= 360;
     draw();
 }
+
+function rotateLeft() {
+    PC_angle--;
+    if (PC_angle < 0) {
+        PC_angle = 359;
+    }
+    draw();
+    console.log("turn left");
+}
+
 
 var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
@@ -180,15 +195,15 @@ function errorContorl() {
     var remainX = PC_posX % cellWidth;
     var remainY = PC_posY % cellHeight;
 
-    if(remainX > 16) {
+    if (remainX > 16) {
         PC_posX += (cellWidth - remainX);
-    } else if(PC_posX < 16) {
+    } else if (PC_posX < 16) {
         PC_posX -= remainX;
     }
 
-    if(remainY > 16) {
+    if (remainY > 16) {
         PC_posY += (cellHeight - remainY);
-    } else if(PC_posY < 16) {
+    } else if (PC_posY < 16) {
         PC_posY -= remainY;
     }
 }
@@ -205,7 +220,6 @@ function checkIsValidCell() {
     } else if (level[PC_posY_cell][PC_posX_cell] == 3) {
         isEnd = true;
         alert("Success");
-
     }
 
 }
