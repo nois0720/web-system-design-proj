@@ -15,12 +15,14 @@ var callbackSave = function (model, callback) {
 
 module.exports.createLevel = function (req, res) {
     var user = util.getSessionUser(req);
+
     var level = new Level({
         createTime: req.body.createTime,
         levelTable: req.body.level_arr,
         levelName: req.body.levelName,
         levelDesigner: req.session.user.user
     });
+
     callbackSave(level, function () {
         Level.find({}, function (err, obj) {
             if (err) {
