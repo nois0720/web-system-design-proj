@@ -101,7 +101,7 @@ function startCmdProcess(index) {
         intervalId = setInterval(move, (1000 / 30));
     } else if (commandList[index].innerHTML == '2') {
         intervalId = setInterval(rotate, (1000 / 90));
-    }
+    } 
 
     intervalList.push(intervalId);
 }
