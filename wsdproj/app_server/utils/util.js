@@ -8,8 +8,6 @@ exports.getSessionUser = function(req)
         user = req.session.user.user;
     } else if (req.query.user) {
         user = req.query.user;
-    } else {
-        user = "";
     }
 
     return user;

@@ -21,7 +21,6 @@ $(document).ready(function(){
 				console.log(responseText);
 				window.location.href = '/?user=' + responseText.user;
 			}
-
 		},
 		error : function(e){
 			lv.showLoginError('Login Failure', 'Please check your username and/or password');

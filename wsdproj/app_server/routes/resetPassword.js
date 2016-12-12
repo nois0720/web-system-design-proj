@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 
-var AM = require('./../account-modules/account-manager');
+var AM = require('./../utils/account-manager');
 
 router.get('/', function(req, res) {
     var email = req.query["e"];

@@ -4,8 +4,8 @@
 var express = require('express');
 var router = express.Router();
 
-var AM = require('./../account-modules/account-manager');
-var EM = require('./../account-modules/email-dispatcher');
+var AM = require('../utils/account-manager');
+var EM = require('../utils/email-dispatcher');
 
 router.post('/', function(req, res){
     // look up the user's account via their email //

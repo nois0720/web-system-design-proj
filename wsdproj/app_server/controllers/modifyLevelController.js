@@ -1,10 +1,6 @@
-/**
- * Created by daeyoung on 2016-12-08.
- */
-
 var mongoose = require('mongoose');
 var Level = require('../models/level');
-var util = require('../util/util');
+var util = require('../utils/util');
 
 var callbackSave = function (model, callback) {
     model.save(function (err) {
@@ -41,9 +37,9 @@ module.exports.createLevel = function (req, res) {
 }
 
 module.exports.getLevelListByUserId = function (req, res) {
-    var levelDesigner = util.getSessionUser(req);
+    var user = util.getSessionUser(req);
 
-    Level.find({levelDesigner: levelDesigner}, function (err, obj) {
+    Level.find({levelDesigner: user}, function (err, obj) {
         if (err) {
             res.render('error', {message: err});
         }
@@ -51,16 +47,15 @@ module.exports.getLevelListByUserId = function (req, res) {
             res.render('error');
         }
         else {
-            res.render('userLevelList', {title: 'Express', levelList: obj, user: levelDesigner});
+            res.render('userLevelList', {title: 'Express', levelList: obj, user: user});
         }
     });
 }
 
 
 module.exports.getLevelByUserId = function (req, res) {
-    var createTime = req.body.createTime; //원래는 req.body.createTime;
-    var levelDesigner = util.getSessionUser(req);
-    Level.findOne({createTime: createTime, levelDesigner: levelDesigner}, function (err, obj) {
+    var user = util.getSessionUser(req);
+    Level.findOne({createTime: req.body.createTime, levelDesigner: user}, function (err, obj) {
         if (err) {
             res.render('error', {message: err});
         }
@@ -68,41 +63,35 @@ module.exports.getLevelByUserId = function (req, res) {
             res.render('error');
         }
         else {
-            res.render('modify_game', {title: 'Express', level: obj, user: levelDesigner});
+            res.render('modify_game', {title: 'Express', level: obj, user: user});
         }
     });
 }
 
 module.exports.updateLevel = function (req, res) {
-    var level = new Level({
-        createTime: req.body.createTime,
-        levelTable: req.body.level_arr,
-        levelName: req.body.levelName,
-        levelDesigner: req.session.user.user
-    });
-
-    Level.update({createTime: level.createTime}, {
+    Level.update({createTime: req.body.createTime}, {
         $set: {
-            levelName: level.levelName,
-            levelDesigner: level.levelDesigner,
-            levelTable: level.levelTable
+            levelName: req.body.levelName,
+            levelDesigner: req.session.user.user,
+            levelTable: req.body.level_arr
         }
     }, function (err) {
         if (err) {
             console.log('err : ' + err);
             res.render('error', {message: err});
         }
-    });
-
-    Level.find({levelDesigner: req.session.user.user}, function (err, obj) {
-        if (err) {
-            console.log('err : ' + err);
-            res.render('error', {message: err});
-        } else if (obj.length == 0) {
-            res.render('error', {message: 'levelList does not exist!! lololololol'});
-        }
         else {
-            res.render('userLevelList', {title: 'levelList', levelList: obj, user: req.session.user.user});
+            Level.find({levelDesigner: req.session.user.user}, function (err, obj) {
+                if (err) {
+                    console.log('err : ' + err);
+                    res.render('error', {message: err});
+                } else if (obj.length == 0) {
+                    res.render('error', {message: 'levelList does not exist!! lololololol'});
+                }
+                else {
+                    res.render('userLevelList', {title: 'levelList', levelList: obj, user: req.session.user.user});
+                }
+            });
         }
     });
 };
@@ -110,22 +99,23 @@ module.exports.updateLevel = function (req, res) {
 //delete level
 module.exports.deleteLevel = function (req, res) {
     var user = util.getSessionUser(req);
-    var createTime = req.body.createTime;
-    console.log(createTime);
-    Level.remove({createTime: createTime, levelDesigner: req.session.user.user}, function (err) {
 
-    });
-
-    Level.find({/*userId를 통해서 리스트를 받아와야함*/}, function (err, obj) {
+    Level.remove({createTime: req.body.createTime, levelDesigner: req.session.user.user}, function (err) {
         if (err) {
             console.log('err : ' + err);
             res.render('error', {message: err});
-        } else if (obj.length == 0) {
-            res.render('userLevelList', {levelList: [], user: user});
-        }
-        else {
-            res.render('userLevelList', {title: 'levelList', levelList: obj, user: user});
+        } else {
+            Level.find({/*userId를 통해서 리스트를 받아와야함*/}, function (err, obj) {
+                if (err) {
+                    console.log('err : ' + err);
+                    res.render('error', {message: err});
+                } else if (obj.length == 0) {
+                    res.render('userLevelList', {levelList: [], user: user});
+                }
+                else {
+                    res.render('userLevelList', {title: 'levelList', levelList: obj, user: user});
+                }
+            });
         }
     });
-
 };

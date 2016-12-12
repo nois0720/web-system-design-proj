@@ -99,10 +99,8 @@ function startCmdProcess(index) {
     }
     if (commandList[index].innerHTML == '1') {
         intervalId = setInterval(move, (1000 / 30));
-        console.log("set interval : " + intervalId);
     } else if (commandList[index].innerHTML == '2') {
         intervalId = setInterval(rotate, (1000 / 90));
-        console.log("set interval : " + intervalId);
     }
 
     intervalList.push(intervalId);
@@ -123,7 +121,6 @@ function stopCmdProcess(index) {
             PC_posY_cell++;
         }
         checkIsValidCell();
-        console.log("pc_x_cell : " + PC_posX_cell + " pc_y_cell : " + PC_posY_cell);
     } else if (commandList[index].innerHTML == cmdCode.turnLeft) {
         PC_dir = (PC_dir + 1) % 4;
     }

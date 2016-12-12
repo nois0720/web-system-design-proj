@@ -4,10 +4,6 @@ var MongoDB 	= require('mongodb').Db;
 var Server 		= require('mongodb').Server;
 var moment 		= require('moment');
 
-/*
-	ESTABLISH DATABASE CONNECTION
-*/
-
 var dbName = process.env.DB_NAME || 'aigodb';
 var dbHost = process.env.DB_HOST || 'localhost'
 var dbPort = process.env.DB_PORT || 27017;

@@ -4,17 +4,11 @@
 var express = require('express');
 var router = express.Router();
 
-var levelCtrl = require('../controllers/levelController');
+var modifyLevelCtrl = require('../controllers/modifyLevelController');
 
-/* GET home page. */
-
-
-router.get('/', levelCtrl.getLevelListByUserId);
-
-router.post('/userLevel', levelCtrl.getLevelByUserId);
-
-router.post('/updateLevel', levelCtrl.updateLevel);
-
-router.post('/deleteLevel', levelCtrl.deleteLevel);
+router.get('/', modifyLevelCtrl.getLevelListByUserId);
+router.post('/userLevel', modifyLevelCtrl.getLevelByUserId);
+router.post('/updateLevel', modifyLevelCtrl.updateLevel);
+router.post('/deleteLevel', modifyLevelCtrl.deleteLevel);
 
 module.exports = router;

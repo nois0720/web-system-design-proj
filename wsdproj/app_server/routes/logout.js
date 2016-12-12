@@ -1,12 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/', function (req, res) {
-    res.clearCookie('user');
-    res.clearCookie('pass');
-    req.session.destroy(function (e) {
-        res.redirect('/');
-    });
-})
+var loginController = require('../controllers/accountController');
+
+router.post('/', loginController.logoutProcess);
 
 module.exports = router;

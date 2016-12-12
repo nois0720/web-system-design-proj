@@ -16,11 +16,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var index = require('./app_server/routes/index');
-var users = require('./app_server/routes/users');
 var game = require('./app_server/routes/game');
 var makeGame = require('./app_server/routes/makeGame');
 var modifyGame = require('./app_server/routes/modifyGame');
-var test = require('./app_server/routes/test');
 var login = require('./app_server/routes/login');
 var logout = require('./app_server/routes/logout');
 var resetPassword = require('./app_server/routes/resetPassword');
@@ -62,11 +60,9 @@ app.use(session({
 }));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/game', game);
 app.use('/makeGame', makeGame);
 app.use('/modifyGame', modifyGame);
-app.use('/test', test);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/reset-password', resetPassword);

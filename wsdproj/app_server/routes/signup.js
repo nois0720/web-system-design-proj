@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var CT = require('./../account-modules/country-list');
-var AM = require('./../account-modules/account-manager');
+var CT = require('./../utils/country-list');
+var AM = require('./../utils/account-manager');
 
 router.get('/', function(req, res) {
     res.render('signup.jade', {  title: 'Signup', countries : CT });

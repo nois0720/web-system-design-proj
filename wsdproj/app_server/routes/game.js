@@ -5,13 +5,9 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 
-// Use connect method to connect to the server
-
 var gameCtrl = require('../controllers/gameController');
 
-/* GET home page. */
-router.post('/start',gameCtrl.startGame);
-
 router.post('/', gameCtrl.gameResult);
+router.post('/start', gameCtrl.startGame);
 
 module.exports = router;

@@ -1,22 +1,19 @@
-var mongoose = require('mongoose');
 var Level = require('../models/level');
-var util = require('../util/util');
+var util = require('../utils/util');
+
 module.exports.startGame = function (req, res) {
     var user = util.getSessionUser(req);
     var createTime = req.body.createTime;
 
-    var level = new Level();
-
     Level.findOne({createTime: createTime}, function (err, obj) {
         if (err) {
-            console.log('err : ' + err);
+            console.log(err);
             res.render('error', {message: err});
         }
         else if (obj == null) {
             res.render('error');
         }
         else {
-            console.log(obj.createTime);
             res.render('game', {title: 'Express', level: obj.levelTable, createTime: obj.createTime, user: user});
         }
     });
@@ -36,7 +33,6 @@ module.exports.gameResult = function (req, res) {
             res.render('error');
         }
         else {
-            console.log(obj.levelTable);
             res.render('result', {arr: sample_arr, levelTable: obj.levelTable, user: user});
         }
     });
@@ -45,7 +41,6 @@ module.exports.gameResult = function (req, res) {
 module.exports.getLevelList = function (req, res) {
     var user = util.getSessionUser(req);
 
-    //var level = new Level();
     Level.find({}, function (err, obj) {
         if (err) {
             console.log('err : ' + err);
