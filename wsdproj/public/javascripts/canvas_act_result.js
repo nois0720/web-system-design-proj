@@ -38,9 +38,12 @@ var obstaclePosArr = new Array(); //obstacle position
 var PC_angle = 0;
 var PC_dir = Dir.up;
 var isEnd = false;
+var successAndEnd = false;
+var failAndEnd = false;
 
 //read level information from result.ejs
 var levelTable = document.getElementsByClassName('levelTable');
+var createTime = document.getElementById('create_time').value;
 
 
 var parseLevel = function () {
@@ -75,6 +78,7 @@ var intervalList = [];
 
 var commandList = document.getElementsByClassName('commandList');
 
+
 function startLogic() {
     for (var i = 0, max = commandList.length; i < max; i++) {
         (function (cmdIndex) {
@@ -104,6 +108,7 @@ function startCmdProcess(index) {
         intervalId = setInterval(rotateLeft, (1000 / 90));
     } else if (commandList[index].innerHTML == '3') {
         intervalId = setInterval(rotateRight, (1000 / 90));
+
     }
 
     intervalList.push(intervalId);
@@ -111,6 +116,9 @@ function startCmdProcess(index) {
 
 function stopCmdProcess(index) {
     clearInterval(intervalList[index]);
+
+
+
     if (commandList[index].innerHTML == cmdCode.move) {
         errorContorl();
 
@@ -130,6 +138,13 @@ function stopCmdProcess(index) {
         PC_dir = (PC_dir + 1) % 4;
     }
     draw();
+
+    if(index == commandList.length-1 && !successAndEnd && !failAndEnd){
+
+        alert('fail');
+        window.location.href='/game/start?createTime='+createTime;
+    }
+
 }
 
 function move() {
@@ -153,7 +168,6 @@ function rotateLeft() {
         PC_angle = 359;
     }
     draw();
-    console.log("turn left");
 }
 
 
@@ -211,16 +225,24 @@ function errorContorl() {
 
 function checkIsValidCell() {
 
-    if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0) {
+    if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0  && !failAndEnd) {
         isEnd = true;
+        failAndEnd = true;
         alert('fail!!!');
+        //window.location.href ="/";
+         window.location.href = '/game/start?createTime='+createTime;
     }
-    if (level[PC_posY_cell][PC_posX_cell] == 2) {
+    if (level[PC_posY_cell][PC_posX_cell] == 2 && failAndEnd) {
         isEnd = true;
-        alert("Fail!!!");
+        failAndEnd = true;
+        alert("fail!!!");
+        //window.location.href ="/";
+        window.location.href = '/game/start?createTime='+createTime;
     } else if (level[PC_posY_cell][PC_posX_cell] == 3) {
         isEnd = true;
+        successAndEnd = true;
         alert("Success");
+        window.location.href='/game/start?createTime='+createTime;
     }
 
 }

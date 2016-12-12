@@ -9,5 +9,6 @@ var gameCtrl = require('../controllers/gameController');
 
 router.post('/', gameCtrl.gameResult);
 router.post('/start', gameCtrl.startGame);
+router.get('/start', gameCtrl.startGame);
 
 module.exports = router;

@@ -64,9 +64,9 @@
             <a class="brand" href="/">Aigo</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="/bootstrap">About</a></li>
-                    <li><a href="/bootstrap">Contact</a></li>
                     <% if(user !== "") { %>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/about">Contact</a></li>
                     <li class="dropdown">
                         <a href="http://getbootstrap.com/2.3.2/examples/hero.html#" class="dropdown-toggle"
                            data-toggle="dropdown">Menu <b class="caret"></b></a>
@@ -115,21 +115,22 @@
                      ondragstart="dragStart(event)"
                      width="64" height="64">
                 </br>
+                <br><br>
                 <form id=submitAnswer name="submitAnswer" onsubmit="getAnswer()" method="post">
-                    <input type="hidden" name="createTime" value="<%= createTime %>">
+                    <input type="hidden" name="createTime" value="<%= createTime %>" id="create_time">
                     <input class="btn btn-lg" type="submit" value="submit">
                 </form>
             </div>
             <div class="sidebar-bottom">
-                <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
+                <div id='delete_zone' class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
                      ondrop="dropDelete(event)"
-                     ondragover="allowDrop(event)" droppable="true"></div>
+                     ondragover="allowDrop(event)" droppable="true" style="background-color:#4bb1cf; "></div>
             </div>
         </div>
         <div class="span4">
             <h2>Sequence</h2>
             <div class="main area" id="sidebar2">
-                <% for(var i = 0;i < 10;i++){ %>
+                <% for(var i = 0;i < 3;i++){ %>
                 <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
                      ondrop="drop(event)"
                      ondragover="allowDrop(event)" areastate="clear"></div>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="/about_boot/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/about_boot/css/creative.css" rel="stylesheet">
+
+    <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/bootstrap-2.3.2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Aigo</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/about">Contact</a></li>
+                    <% if(user !== "") { %>
+                    <li class="dropdown">
+                        <a href="http://getbootstrap.com/2.3.2/examples/hero.html#" class="dropdown-toggle"
+                           data-toggle="dropdown">Menu <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="divider"></li>
+                            <li class="nav-header">My Menu</li>
+                            <li><a href="/makeGame?user=<%=user%>">Create Game</a></li>
+                            <li><a href="/modifyGame?user=<%=user%>">Modify Game</a></li>
+                            <li><a href="/">Modify Info</a></li>
+                        </ul>
+                    </li>
+                    <% } %>
+                </ul>
+                <% if(user === "") { %>
+                <form class="navbar-form pull-right" method="get" action="/login">
+                    <button type="submit" class="btn btn-lg">Sign in</button>
+                </form>
+                <% } else { %>
+                <form class="navbar-form pull-right" method="post" action="/logout">
+                    <button type="submit" class="btn btn-lg btn-success">Logout</button>
+                </form>
+                <% } %>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<header>
+    <div class="header-content">
+        <div class="header-content-inner">
+            <h1 id="homeHeading">You can create your Game</h1>
+            <hr>
+            <a href="/" class="btn btn-primary btn-xl page-scroll">GO GAME</a>
+        </div>
+    </div>
+</header>
+
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Contact</h2>
+                <hr class="primary">
+                <p>Ready to start GAME with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+            </div>
+            <div class="col-lg-4 col-lg-offset-2 text-center">
+                <i class="fa fa-phone fa-3x sr-contact"></i>
+                <p>111-222-3333</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                <p><a href="mailto:your-email@your-domain.com">ndy766@naver.com</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+
+</html>
