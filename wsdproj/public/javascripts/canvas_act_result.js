@@ -39,6 +39,7 @@ var PC_angle = 0;
 var PC_dir = Dir.up;
 var isEnd = false;
 var successAndEnd = false;
+var failAndEnd = false;
 
 //read level information from result.ejs
 var levelTable = document.getElementsByClassName('levelTable');
@@ -116,10 +117,7 @@ function startCmdProcess(index) {
 function stopCmdProcess(index) {
     clearInterval(intervalList[index]);
 
-    if(index == commandList.length-1 && !successAndEnd){
-        alert('fail');
-        window.location.href='/game/start?createTime='+createTime;
-    }
+
 
     if (commandList[index].innerHTML == cmdCode.move) {
         errorContorl();
@@ -140,6 +138,12 @@ function stopCmdProcess(index) {
         PC_dir = (PC_dir + 1) % 4;
     }
     draw();
+
+    if(index == commandList.length-1 && !successAndEnd && !failAndEnd){
+
+        alert('fail');
+        window.location.href='/game/start?createTime='+createTime;
+    }
 
 }
 
@@ -164,7 +168,6 @@ function rotateLeft() {
         PC_angle = 359;
     }
     draw();
-    console.log("turn left");
 }
 
 
@@ -222,14 +225,16 @@ function errorContorl() {
 
 function checkIsValidCell() {
 
-    if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0) {
+    if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0  && !failAndEnd) {
         isEnd = true;
+        failAndEnd = true;
         alert('fail!!!');
         //window.location.href ="/";
          window.location.href = '/game/start?createTime='+createTime;
     }
-    if (level[PC_posY_cell][PC_posX_cell] == 2) {
+    if (level[PC_posY_cell][PC_posX_cell] == 2 && failAndEnd) {
         isEnd = true;
+        failAndEnd = true;
         alert("fail!!!");
         //window.location.href ="/";
         window.location.href = '/game/start?createTime='+createTime;

@@ -92,7 +92,7 @@ function changeImg(ev) {
 
 function createImg(id) {
     var imgPath = "/images/" + id + ".png";
-    var img = document.createElement("IMG");
+    var img = document.createElement("img");
 
     img.setAttribute("id", id);
     img.setAttribute("src", imgPath);

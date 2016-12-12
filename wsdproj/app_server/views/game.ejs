@@ -64,8 +64,8 @@
             <a class="brand" href="/">Aigo</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="/bootstrap">About</a></li>
-                    <li><a href="/bootstrap">Contact</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/about">Contact</a></li>
                     <li class="dropdown">
                         <a href="http://getbootstrap.com/2.3.2/examples/hero.html#" class="dropdown-toggle"
                            data-toggle="dropdown">Menu <b class="caret"></b></a>
@@ -113,16 +113,16 @@
                      ondragstart="dragStart(event)"
                      width="64" height="64">
                 </br>
+                <br><br>
                 <form id=submitAnswer name="submitAnswer" onsubmit="getAnswer()" method="post">
                     <input type="hidden" name="createTime" value="<%= createTime %>" id="create_time">
                     <input class="btn btn-lg" type="submit" value="submit">
                 </form>
             </div>
-            <div class="sidebar-bottom" id="commandDiv">
-
-                <div class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
+            <div class="sidebar-bottom">
+                <div id='delete_zone' class="droptarget" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"
                      ondrop="dropDelete(event)"
-                     ondragover="allowDrop(event)" droppable="true"></div>
+                     ondragover="allowDrop(event)" droppable="true" style="background-color:#4bb1cf; "></div>
             </div>
         </div>
         <div class="span4">
