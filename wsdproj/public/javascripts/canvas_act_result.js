@@ -129,6 +129,7 @@ function stopCmdProcess(index) {
     } else if (commandList[index].innerHTML == cmdCode.turnRight) {
         PC_dir = (PC_dir + 1) % 4;
     }
+    draw();
 }
 
 function move() {
@@ -197,13 +198,13 @@ function errorContorl() {
 
     if (remainX > 16) {
         PC_posX += (cellWidth - remainX);
-    } else if (PC_posX < 16) {
+    } else if (remainX < 16) {
         PC_posX -= remainX;
     }
 
     if (remainY > 16) {
         PC_posY += (cellHeight - remainY);
-    } else if (PC_posY < 16) {
+    } else if (remainY < 16) {
         PC_posY -= remainY;
     }
 }

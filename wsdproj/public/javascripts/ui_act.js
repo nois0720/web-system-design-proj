@@ -115,8 +115,10 @@ function getAnswer() {
                 al_no.push(1);
             } else if (answerDiv[i].childNodes[0].getAttribute('id') == 'rotate') {
                 al_no.push(2);
+            } else if (answerDiv[i].childNodes[0].getAttribute('id')=='rotate2'){
+                al_no.push(3);
             }
-        } else {
+            } else {
             continue;
         }
     }
