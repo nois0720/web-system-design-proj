@@ -32,6 +32,27 @@ function drop(ev) {
             changeImg(ev);
         }
     }
+    //dynamic add
+    var dropTargetList = document.getElementsByClassName('droptarget');
+    var imgBlockCount = 0;
+    for(var i=0;i<dropTargetList.length;i++){
+        if(dropTargetList[i].hasChildNodes() ){
+            imgBlockCount++;
+        }
+    }
+
+    if(imgBlockCount > dropTargetList.length-3){
+
+        var newDiv = document.createElement('div');
+        newDiv.setAttribute('class', 'droptarget');
+        newDiv.setAttribute('ondragenter', 'dragEnter(event)');
+        newDiv.setAttribute('ondragleave', 'dragLeave(event)');
+        newDiv.setAttribute('ondrop', 'drop(event)');
+        newDiv.setAttribute('ondragover', 'allowDrop(event)');
+        newDiv.setAttribute('areastate', 'clear');
+        document.getElementById('sidebar2').appendChild(newDiv);
+    }
+
 }
 
 function dropDelete(ev) {

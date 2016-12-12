@@ -38,11 +38,12 @@ var obstaclePosArr = new Array(); //obstacle position
 var PC_angle = 0;
 var PC_dir = Dir.up;
 var isEnd = false;
+var successAndEnd = false;
 
 //read level information from result.ejs
 var levelTable = document.getElementsByClassName('levelTable');
-var createTime = document.getElementById('create_time');
-console.log(createTime.innerHTML);
+var createTime = document.getElementById('create_time').value;
+
 
 var parseLevel = function () {
     for (var i = 0; i < 8; i++) {
@@ -114,6 +115,12 @@ function startCmdProcess(index) {
 
 function stopCmdProcess(index) {
     clearInterval(intervalList[index]);
+
+    if(index == commandList.length-1 && !successAndEnd){
+        alert('fail');
+        window.location.href='/game/start?createTime='+createTime;
+    }
+
     if (commandList[index].innerHTML == cmdCode.move) {
         errorContorl();
 
@@ -133,6 +140,7 @@ function stopCmdProcess(index) {
         PC_dir = (PC_dir + 1) % 4;
     }
     draw();
+
 }
 
 function move() {
@@ -217,17 +225,19 @@ function checkIsValidCell() {
     if (PC_posX_cell > 7 || PC_posY_cell > 7 || PC_posX_cell < 0 || PC_posY_cell < 0) {
         isEnd = true;
         alert('fail!!!');
-        window.location.href ="/";
-        // window.location.href = '/game/start?createTime='+createTime;
+        //window.location.href ="/";
+         window.location.href = '/game/start?createTime='+createTime;
     }
     if (level[PC_posY_cell][PC_posX_cell] == 2) {
         isEnd = true;
-        alert("Fail!!!");
-        window.location.href ="/";
-        // window.location.href = '/game/start?createTime='+createTime;
+        alert("fail!!!");
+        //window.location.href ="/";
+        window.location.href = '/game/start?createTime='+createTime;
     } else if (level[PC_posY_cell][PC_posX_cell] == 3) {
         isEnd = true;
+        successAndEnd = true;
         alert("Success");
+        window.location.href='/game/start?createTime='+createTime;
     }
 
 }
