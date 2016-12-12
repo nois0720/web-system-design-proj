@@ -1,15 +1,8 @@
-/**
- * Created by daeyoung on 2016-12-09.
- */
-/**
- * Created by daeyoung on 2016-12-08.
- */
-
 var mongoose = require('mongoose');
 var Level = require('../models/level');
-
+var util = require('../util/util');
 module.exports.startGame = function (req, res) {
-
+    var user = util.getSessionUser(req);
     var createTime = req.body.createTime;
 
     var level = new Level();
@@ -24,20 +17,19 @@ module.exports.startGame = function (req, res) {
         }
         else {
             console.log(obj.createTime);
-            res.render('game', {title: 'Express', level: obj.levelTable, createTime: obj.createTime});
+            res.render('game', {title: 'Express', level: obj.levelTable, createTime: obj.createTime, user: user});
         }
     });
 };
 
-//send command to result page
 module.exports.gameResult = function (req, res) {
+    var user = util.getSessionUser(req);
 
     var sample_arr = req.body.test_array;
     var createTime = req.body.createTime;
 
     Level.findOne({createTime: createTime}, function (err, obj) {
         if (err) {
-            console.log('디비에러');
             res.render('error');
         }
         else if (obj == null) {
@@ -45,24 +37,15 @@ module.exports.gameResult = function (req, res) {
         }
         else {
             console.log(obj.levelTable);
-            res.render('result', {arr: sample_arr, levelTable: obj.levelTable});
+            res.render('result', {arr: sample_arr, levelTable: obj.levelTable, user: user});
         }
     });
 };
 
 module.exports.getLevelList = function (req, res) {
-    var user = "";
-    if (req.session.user) {
-        user = req.session.user.user;
-    } else if (req.query.user) {
-        user = req.query.user;
-    } else {
-        user = "";
-    }
+    var user = util.getSessionUser(req);
 
-    console.log("user : "+user);
-
-    var level = new Level();
+    //var level = new Level();
     Level.find({}, function (err, obj) {
         if (err) {
             console.log('err : ' + err);

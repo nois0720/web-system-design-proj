@@ -27,13 +27,12 @@
             var tr = event.target;
             var target = tr.parentNode.childNodes[7];
             var createTime = target.innerText;
-
-            var el;
-            el = document.createElement("input");
-            el.type = "hidden";
-            el.name = "createTime";
-            el.value = createTime;
-            form.appendChild(el);
+            var el_createTime;
+            el_createTime = document.createElement("input");
+            el_createTime.type = "hidden";
+            el_createTime.name = "createTime";
+            el_createTime.value = createTime;
+            form.appendChild(el_createTime);
             form.setAttribute('action', '/game/start');
             form.submit();
         }
@@ -65,8 +64,8 @@
                         <ul class="dropdown-menu">
                             <li class="divider"></li>
                             <li class="nav-header">My Menu</li>
-                            <li><a href="/makeGame">Create Game</a></li>
-                            <li><a href="/modifyGame">Modify Game</a></li>
+                            <li><a href="/makeGame?user=<%=user%>">Create Game</a></li>
+                            <li><a href="/modifyGame?user=<%=user%>">Modify Game</a></li>
                             <li><a href="/">Modify Info</a></li>
                         </ul>
                     </li>
